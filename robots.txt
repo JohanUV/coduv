@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://coduv.vercel.app/sitemap.xml
