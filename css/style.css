@@ -843,3 +843,4 @@ html.shot .walker { transition: none; }
   .hero { padding-top: 28px; }
   .walker { width: 88px; height: 88px; z-index: 44; }
 }
+@media (max-width: 900px) { .wa-float { display: none; } .mcta { z-index: 61; } }
