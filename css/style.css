@@ -844,3 +844,10 @@ html.shot .walker { transition: none; }
   .walker { width: 88px; height: 88px; z-index: 44; }
 }
 @media (max-width: 900px) { .wa-float { display: none; } .mcta { z-index: 61; } }
+
+/* ---------- Cody 3D (walker3d.js) ---------- */
+.walker3d { position: fixed; left: 0; top: 0; width: 100vw; height: 100vh; z-index: 45; pointer-events: none; opacity: 0; transition: opacity 0.4s; }
+/* crossfade del hero: gecko sobre la C → C vacía */
+.gecko { position: relative; }
+.gecko .depth--full { opacity: calc(1 - var(--swap, 0)); transition: opacity 0.35s; }
+.gecko.is-empty .gecko__lid { opacity: 0; }

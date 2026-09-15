@@ -88,7 +88,7 @@
 <div class="hero__stage reveal" data-delay="2">
 <figure class="hero__media" id="tilt">
 <button aria-label="Cody, la mascota de CODUV. Tócalo." class="gecko" data-i18n-aria="aria.gecko" id="gecko" type="button">
-<span class="depth" data-depth="img/brand/mark-depth-512.webp" data-strength="0.06"><img alt="" fetchpriority="high" height="572" src="img/brand/mark-512.webp" width="512"/></span>
+<span class="depth depth--full" data-depth="img/brand/mark-depth-512.webp" data-strength="0.06"><img alt="" fetchpriority="high" height="572" src="img/brand/mark-512.webp" width="512"/></span>
 <span aria-hidden="true" class="gecko__lid"></span>
 </button>
 <span class="bubble" id="bubble" role="status"></span>
@@ -178,7 +178,7 @@
 <p class="lead" data-i18n="servicios.p2">Cada servicio se cotiza por resultado, no por horas. Te decimos qué encaja contigo, no lo que más factura.</p>
 </div>
 <div class="bento">
-<article class="card card--feature span-7 reveal">
+<article class="card span-7 reveal">
 <div>
 <div class="card__icon"><svg viewbox="0 0 24 24"><rect height="14" rx="2" width="18" x="3" y="4"></rect><path d="M3 9h18M8 20h8"></path></svg></div>
 <h3 data-i18n="servicios.h31">Sitios web que venden</h3>
@@ -188,7 +188,6 @@
 <div class="viz viz--web" aria-hidden="true"><div class="viz__browser"><span></span><span></span><span></span><i class="viz__url"></i></div>
 <div class="viz__page"><div class="viz__h"></div><div class="viz__l"></div><div class="viz__l viz__l--s"></div><div class="viz__btn">WhatsApp</div><div class="viz__img"></div></div>
 <div class="viz__cursor"></div><div class="viz__toast" data-i18n="viz.toast">+1 mensaje</div></div>
-<span class="card__art depth" data-depth="img/brand/mark-depth-512.webp" data-strength="0.05"><img alt="" loading="lazy" src="img/brand/mark-512.webp"/></span>
 </article>
 <article class="card card--orange span-5 reveal" data-delay="1">
 <div class="card__icon"><svg viewbox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"></path></svg></div>
@@ -575,7 +574,9 @@
 </a>
 <script defer="" src="js/i18n.js"></script>
 <script defer="" src="js/depth.js"></script>
-<script defer="" src="js/walker.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script defer="" src="js/gecko-data.js"></script>
+<script defer="" src="js/walker3d.js"></script>
 <script defer="" src="js/main.js"></script>
 </body>
 </html>

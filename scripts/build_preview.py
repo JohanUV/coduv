@@ -5,19 +5,21 @@ css=open(f'{root}/css/style.css').read()
 js=open(f'{root}/js/main.js').read()
 def data(path):
     p=os.path.join(root,path); ext=path.rsplit('.',1)[1]
-    mime={'webp':'image/webp','png':'image/png','jpg':'image/jpeg','svg':'image/svg+xml'}[ext]
+    mime={'webp':'image/webp','png':'image/png','jpg':'image/jpeg','svg':'image/svg+xml','bin':'application/octet-stream'}[ext]
     return 'data:'+mime+';base64,'+base64.b64encode(open(p,'rb').read()).decode()
 # no incrustar el PNG grande de recorte, no se usa en la página
 css=re.sub(r'url\("\.\./(img/[^"]+)"\)', lambda m:'url("'+data(m.group(1))+'")', css)
 html=re.sub(r'(src|href|data-depth)="(img/[^"]+)"', lambda m:f'{m.group(1)}="{data(m.group(2))}"', html)
 depth=open(f'{root}/js/depth.js').read()
-walker=open(f'{root}/js/walker.js').read()
+gdata='window.CODUV_GECKO = { bin: "'+data('img/gecko/gecko.bin')+'", tex: "'+data('img/gecko/gecko.jpg')+'", c: "'+data('img/gecko/c.bin')+'" };' if os.path.exists(f'{root}/img/gecko/c.bin') else ''
+walker3d=open(f'{root}/js/walker3d.js').read()
 html=re.sub(r'content="(img/[^"]+)"', lambda m:f'content="{data(m.group(1))}"', html)
 html=re.sub(r'<link [^>]*href="css/style.css"[^>]*>','<style>\n'+css+'\n</style>',html)
 i18n=open(f'{root}/js/i18n.js').read()
 html=re.sub(r'<script [^>]*src="js/i18n.js"[^>]*></script>','<script>\n'+i18n+'\n</script>',html)
 html=re.sub(r'<script [^>]*src="js/depth.js"[^>]*></script>','<script>\n'+depth+'\n</script>',html)
-html=re.sub(r'<script [^>]*src="js/walker.js"[^>]*></script>','<script>\n'+walker+'\n</script>',html)
+html=re.sub(r'<script [^>]*src="js/gecko-data.js"[^>]*></script>','<script>\n'+gdata+'\n</script>',html)
+html=re.sub(r'<script [^>]*src="js/walker3d.js"[^>]*></script>','<script>\n'+walker3d+'\n</script>',html)
 html=re.sub(r'<script [^>]*src="js/main.js"[^>]*></script>','<script>\n'+js+'\n</script>',html)
 # quitar doctype/html/head/body: el artifact envuelve el contenido
 m=re.search(r'<head>(.*?)</head>',html,re.S); head=m.group(1)
