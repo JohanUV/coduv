@@ -51,7 +51,7 @@
       <a href="#faq">Preguntas</a>
       <a href="#contacto">Contacto</a>
     </nav>
-    <a class="btn btn--primary btn--sm nav__cta js-wa" href="#contacto">Diagnóstico sin costo</a>
+    <a class="btn btn--orange btn--sm nav__cta js-wa" href="#contacto">Diagnóstico sin costo</a>
     <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú">
       <span></span><span></span>
     </button>
@@ -61,23 +61,24 @@
 <main>
 
 <!-- ===================== HERO ===================== -->
-<section class="hero">
-  <div class="hero__bg" aria-hidden="true"></div>
+<section class="hero" id="hero">
+  <canvas class="hero__net" id="net" aria-hidden="true"></canvas>
+  <div class="hero__spot" id="spot" aria-hidden="true"></div>
   <div class="wrap hero__grid">
     <div class="hero__text">
       <p class="pill reveal">Latacunga · Para todo el Ecuador</p>
       <h1 class="display reveal" data-delay="1">
         Tu negocio<br>
-        trabaja <span class="serif">mientras</span><br>
-        tú <span class="accent">descansas.</span>
+        <span class="rotator" id="rotator" aria-live="polite"><span class="rotator__word is-in">vende</span></span><br>
+        <span class="thin">mientras</span> tú <span class="serif">descansas.</span>
       </h1>
-      <p class="lead reveal" data-delay="2">Sitios web que venden, sistemas hechos para cómo trabajas y automatizaciones que recuperan horas. Código propio, sin plantillas, con precio cerrado antes de empezar.</p>
+      <p class="lead reveal" data-delay="2">Sitios web que convierten visitas en clientes, sistemas hechos para cómo trabajas y automatizaciones que responden, registran y cobran por ti. Código propio, precio cerrado antes de empezar.</p>
       <div class="hero__cta reveal" data-delay="3">
-        <a class="btn btn--primary js-wa" href="#contacto" data-msg="Hola CODUV, quiero un diagnóstico sin costo para mi negocio.">
+        <a class="btn btn--orange btn--lg js-wa" href="#contacto" data-msg="Hola CODUV, quiero un diagnóstico sin costo para mi negocio.">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 12 12 0 0 0 4.6 4c1.7.7 2.1.6 2.8.5a2.4 2.4 0 0 0 1.6-1.1 2 2 0 0 0 .1-1.1c0-.1-.2-.2-.5-.3Z"/></svg>
           Pedir diagnóstico sin costo
         </a>
-        <a class="btn btn--ghost" href="#trabajos">Ver trabajos en vivo</a>
+        <a class="btn btn--ghost btn--lg" href="#calculadora">Calcular cuánto pierdo hoy</a>
       </div>
       <ul class="hero__points reveal" data-delay="4">
         <li>Sin compromiso</li>
@@ -85,16 +86,26 @@
         <li>Hablas directo con quien programa</li>
       </ul>
     </div>
-    <figure class="hero__media reveal" data-delay="2">
-      <img src="img/brand/mark-512.webp" alt="Gecko azul de CODUV abrazando la letra C" width="512" height="572" fetchpriority="high">
-      <div class="hero__chips" aria-hidden="true">
-        <span class="chip chip--1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h10M4 18h16"/></svg>Sitio web</span>
-        <span class="chip chip--2 chip--orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/></svg>Automatización</span>
-        <span class="chip chip--3 chip--green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Entregado</span>
-        <span class="chip chip--4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 20h8"/></svg>Sistema a medida</span>
+
+    <div class="hero__stage reveal" data-delay="2">
+      <figure class="hero__media" id="tilt">
+        <img src="img/brand/mark-512.webp" alt="Gecko azul de CODUV abrazando la letra C" width="512" height="572" fetchpriority="high">
+      </figure>
+      <div class="flow" id="flow" aria-label="Simulación de una automatización de CODUV">
+        <div class="flow__head">
+          <span class="flow__dot"></span>
+          <span class="flow__title" id="flowTitle">Automatización en vivo</span>
+          <span class="flow__clock" id="flowClock">00:00</span>
+        </div>
+        <ol class="flow__steps" id="flowSteps"></ol>
+        <div class="flow__foot">
+          <span>Tiempo ahorrado en esta sesión</span>
+          <b id="flowSaved">0 min</b>
+        </div>
       </div>
-    </figure>
+    </div>
   </div>
+  <a class="hero__scroll" href="#problema" aria-label="Bajar"><span></span></a>
 </section>
 
 <!-- ===================== MARQUEE ===================== -->
@@ -105,19 +116,51 @@
   </div>
 </div>
 
-<!-- ===================== PROBLEMA ===================== -->
+<!-- ===================== PROBLEMA + CALCULADORA ===================== -->
 <section class="section" id="problema">
-  <div class="wrap">
-    <div class="section__head section__head--left reveal">
-      <p class="pill">El problema</p>
-      <h2 class="display">Deja de hacer <span class="accent">trabajo de robot.</span></h2>
-      <p class="lead">Copiar pedidos de WhatsApp a un Excel. Responder lo mismo cincuenta veces. Una web hecha con plantilla que no trae clientes. Esas horas no son tu negocio: son fricción. Se puede ordenar, programar y quitar de tu camino.</p>
+  <div class="wrap problem">
+    <div class="problem__text">
+      <div class="section__head section__head--left reveal">
+        <p class="pill">El problema</p>
+        <h2 class="display">Deja de hacer <span class="accent">trabajo de robot.</span></h2>
+        <p class="lead">Copiar pedidos de WhatsApp a un Excel. Responder lo mismo cincuenta veces. Una web hecha con plantilla que no trae clientes. Esas horas no son tu negocio: son fricción. Mueve los controles y mira cuánto te cuesta cada mes.</p>
+      </div>
+      <div class="stats reveal" data-delay="1">
+        <div class="stat"><b data-count="5">0</b><small>sitios de clientes en vivo, en producción</small></div>
+        <div class="stat"><b data-count="10" data-prefix="+">0</b><small>sistemas construidos de punta a punta</small></div>
+        <div class="stat"><b data-count="9">0</b><small>fuentes de datos estatales integradas en un solo sistema</small></div>
+        <div class="stat"><b data-count="100" data-suffix="%">0</b><small>código propio, sin plantillas ni constructores</small></div>
+      </div>
     </div>
-    <div class="stats reveal" data-delay="1">
-      <div class="stat"><b>5</b><small>sitios de clientes en vivo, en producción</small></div>
-      <div class="stat"><b>+10</b><small>sistemas construidos de punta a punta</small></div>
-      <div class="stat"><b>9</b><small>fuentes de datos estatales integradas en un solo sistema</small></div>
-      <div class="stat"><b>100<span>%</span></b><small>código propio, sin plantillas ni constructores</small></div>
+
+    <div class="calc reveal" data-delay="1" id="calculadora">
+      <div class="calc__head">
+        <span class="pill pill--green">Calculadora</span>
+        <h3>¿Cuánto te cuesta el trabajo de robot?</h3>
+      </div>
+      <div class="calc__row">
+        <label for="cMsgs">Mensajes repetidos que respondes al día <output id="oMsgs">40</output></label>
+        <input type="range" id="cMsgs" min="0" max="200" step="5" value="40">
+      </div>
+      <div class="calc__row">
+        <label for="cCopy">Pedidos o datos que copias a mano al día <output id="oCopy">15</output></label>
+        <input type="range" id="cCopy" min="0" max="100" step="1" value="15">
+      </div>
+      <div class="calc__row">
+        <label for="cRep">Horas a la semana armando reportes o cotizaciones <output id="oRep">3</output></label>
+        <input type="range" id="cRep" min="0" max="20" step="0.5" value="3">
+      </div>
+      <div class="calc__row">
+        <label for="cRate">Cuánto vale una hora de tu trabajo (USD) <output id="oRate">10</output></label>
+        <input type="range" id="cRate" min="3" max="60" step="1" value="10">
+      </div>
+      <div class="calc__result">
+        <div><b id="rHours">0</b><small>horas al mes en trabajo repetitivo</small></div>
+        <div><b id="rMoney">$0</b><small>al mes que no vuelven</small></div>
+        <div><b id="rDays">0</b><small>días de trabajo al año</small></div>
+      </div>
+      <p class="calc__note">Estimación con 1,5 min por mensaje, 3 min por registro manual y 26 días laborables. Tu diagnóstico usa tus números reales.</p>
+      <a class="btn btn--orange btn--block js-wa" id="calcCta" href="#contacto">Quiero recuperar estas horas</a>
     </div>
   </div>
 </section>
@@ -189,7 +232,8 @@
       <h2 class="display">Sin sorpresas, <span class="serif">de principio</span> a fin</h2>
       <p class="lead">Un proceso corto y visible. Sabes qué se va a hacer, cuánto cuesta y cuándo lo tienes antes de que se escriba la primera línea.</p>
     </div>
-    <div class="steps">
+    <div class="steps" id="steps">
+      <div class="steps__line" aria-hidden="true"><i id="stepsFill"></i></div>
       <div class="step reveal">
         <h3>Diagnóstico</h3>
         <p>Una conversación por WhatsApp o llamada. Nos cuentas cómo trabajas hoy y dónde se pierde tiempo o clientes. No es una llamada de ventas.</p>
