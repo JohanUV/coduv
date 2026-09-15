@@ -9,12 +9,17 @@
   "use strict";
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const forced = parseFloat(new URLSearchParams(location.search).get("walk"));
+  const DBG = location.search.includes("dbg");
   if (reduced) return;
   if (document.documentElement.classList.contains("shot") && isNaN(forced)) return;
   const heroGecko = document.getElementById("gecko");
   const heroImg = heroGecko && heroGecko.querySelector("img");
   const data = window.CODUV_GECKO;
-  if (!heroGecko || !data || !window.THREE) return;
+  if (!heroGecko || !data) return;
+  let tries = 0;
+  if (!window.THREE) { const w = setInterval(() => { if (window.THREE) { clearInterval(w); boot(); } else if (++tries > 200) clearInterval(w); }, 40); return; }
+  boot();
+  function boot() {
   const THREE = window.THREE;
 
   // ─── Lienzo fijo sobre toda la página ────────────────────────────────
@@ -38,10 +43,14 @@
   };
   resize(); window.addEventListener("resize", resize);
 
+  // ─── Carga de la malla: por URL o incrustada en base64 (vista previa) ─
+  const b64buf = (b64) => { const bin = atob(b64); const u8 = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i); return u8.buffer; };
+  const grab = (url, b64) => (b64 ? Promise.resolve(b64buf(b64)) : fetch(url).then((r) => r.arrayBuffer()));
+
   // ─── Carga de la malla (formato propio, ver scripts/export_gecko.py) ─
   const uni = { uUnroll: { value: 0 }, uPhase: { value: 0 }, uAmp: { value: 0 }, uTailAmp: { value: 0 }, uBob: { value: 0 } };
   let mesh = null, meta = null;
-  fetch(data.bin).then((r) => r.arrayBuffer()).then((buf) => {
+  grab(data.bin, data.binB64).then((buf) => {
     const dv = new DataView(buf); let o = 0;
     const nv = dv.getUint32(o, true); o += 4; const nf = dv.getUint32(o, true); o += 4;
     meta = { px512: dv.getFloat32(o, true), ox: dv.getFloat32(o + 4, true), oy: dv.getFloat32(o + 8, true), ang0: dv.getFloat32(o + 12, true) }; o += 16;
@@ -98,7 +107,7 @@
   }).catch(() => {});
   // la C del hero en 3D (blanca, brillante): se muestra cuando el gecko se va
   let cmesh = null, cmeta = null;
-  if (data.c) fetch(data.c).then((r) => r.arrayBuffer()).then((buf) => {
+  if (data.c || data.cB64) grab(data.c, data.cB64).then((buf) => {
     const dv = new DataView(buf); const nv = dv.getUint32(0, true), nf = dv.getUint32(4, true);
     cmeta = { px512: dv.getFloat32(8, true), ox: dv.getFloat32(12, true), oy: dv.getFloat32(16, true) };
     let o = 20;
@@ -112,6 +121,22 @@
     cmesh = new THREE.Mesh(g, m); cmesh.frustumCulled = false; scene.add(cmesh);
   }).catch(() => {});
 
+  // ─── Fuente del scroll: la ventana o el contenedor que realmente se desplaza ─
+  let host = null, hostAge = 0;
+  const findHost = () => {
+    let p = heroGecko.parentElement;
+    while (p && p !== document.documentElement) {
+      const st = getComputedStyle(p);
+      if (/(auto|scroll|overlay)/.test(st.overflowY) && p.scrollHeight > p.clientHeight + 4) return p;
+      p = p.parentElement;
+    }
+    return null;
+  };
+  const scrollHost = () => { if (!hostAge--) { host = findHost(); hostAge = 30; } return host; };
+  const scrollPos = () => { const h = scrollHost(); return h ? h.scrollTop : (window.scrollY || document.documentElement.scrollTop || 0); };
+  const viewH = () => { const h = scrollHost(); return h ? h.clientHeight : window.innerHeight; };
+  const scrollMax = () => { const h = scrollHost(); return h ? Math.max(1, h.scrollHeight - h.clientHeight) : Math.max(1, document.documentElement.scrollHeight - window.innerHeight); };
+
   // ─── Ruta por la pantalla ─────────────────────────────────────────────
   const base = [[0.86, 0.24], [0.88, 0.56], [0.84, 0.84], [0.55, 0.88], [0.16, 0.82], [0.13, 0.46], [0.16, 0.2], [0.5, 0.14], [0.85, 0.32], [0.87, 0.7], [0.6, 0.88], [0.18, 0.86], [0.14, 0.5], [0.4, 0.17], [0.84, 0.24], [0.86, 0.6], [0.66, 0.86]];
   const jitter = () => (Math.random() - 0.5) * 0.06;
@@ -121,7 +146,7 @@
     0.5 * ((2 * p1[1]) + (-p0[1] + p2[1]) * t + (2 * p0[1] - 5 * p1[1] + 4 * p2[1] - p3[1]) * t2 + (-p0[1] + 3 * p1[1] - 3 * p2[1] + p3[1]) * t3)]; };
   let samples = [], total = 0;
   const buildPath = () => {
-    const vw = window.innerWidth, vh = window.innerHeight; samples = []; total = 0;
+    const vw = window.innerWidth, vh = viewH(); samples = []; total = 0;
     for (let i = 0; i < pts.length - 1; i++) {
       const p0 = pts[Math.max(0, i - 1)], p1 = pts[i], p2 = pts[i + 1], p3 = pts[Math.min(pts.length - 1, i + 2)];
       for (let k = 0; k < 24; k++) { const q = cat(p0, p1, p2, p3, k / 24); samples.push([q[0] * vw, q[1] * vh]); }
@@ -141,7 +166,6 @@
   // ─── Estado y comportamiento ─────────────────────────────────────────
   const mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
   window.addEventListener("pointermove", (e) => { mouse.x = e.clientX; mouse.y = e.clientY; }, { passive: true });
-  const scrollMax = () => Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
   const lerpAngle = (a, b, k) => { const d = ((b - a + 540) % 360) - 180; return a + d * k; };
   let px = 0, py = 0, ang = 0, phase = 0, walking = 0, lastScroll = window.scrollY, lastMove = performance.now();
   let lookT = 0, look = 0, tailT = 0, tailA = 0, bobT = 0, bob = 0, nextIdle = performance.now() + 2500, unroll = 0;
@@ -158,7 +182,8 @@
   const frame = (now) => {
     if (!SHOT) requestAnimationFrame(frame);
     if (!mesh || !meta) return;
-    const sy = window.scrollY, t = isNaN(forced) ? sy / scrollMax() : forced;
+    const sy = scrollPos(), t = isNaN(forced) ? sy / scrollMax() : forced;
+    if (DBG) document.documentElement.dataset.w3dt = t.toFixed(3) + "|" + Math.round(sy) + "|" + (scrollHost() ? "host" : "win");
     if (Math.abs(sy - lastScroll) > 0.5) lastMove = now;
     lastScroll = sy;
     // punto de la C (posición del gecko del hero) en coordenadas de pantalla
@@ -205,7 +230,7 @@
     if (Math.abs(sw - swapT.v) > 0.005) { swapT.v = sw; heroGecko.style.setProperty("--swap", String(sw)); heroGecko.classList.toggle("is-empty", sw > 0.5); }
     if (cmesh && cmeta) {
       const csc = cmeta.px512 * k512;
-      cmesh.visible = sw > 0.004 && r.bottom > 0 && r.top < window.innerHeight;
+      cmesh.visible = sw > 0.004 && r.bottom > 0 && r.top < viewH();
       cmesh.material.opacity = sw;
       cmesh.scale.set(csc, csc, csc);
       cmesh.position.set(r.left + cmeta.ox * k512, -(r.top + cmeta.oy * k512), -5);
@@ -214,4 +239,5 @@
   };
   const r0 = heroImg.getBoundingClientRect(); px = r0.left + r0.width * 0.6; py = r0.top + r0.height * 0.4;
   if (SHOT) setInterval(() => frame(performance.now()), 16); else requestAnimationFrame(frame);
+  }
 })();

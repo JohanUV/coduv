@@ -32,10 +32,30 @@
 
   const y = $("#year"); if (y) y.textContent = new Date().getFullYear();
 
+  // ─── Fuente del scroll (ventana o contenedor que se desplaza) ────────
+  let _host = null, _hostAge = 0;
+  const scrollHost = () => {
+    if (_hostAge-- <= 0) {
+      _hostAge = 30; _host = null;
+      let p = document.body.firstElementChild ? document.body : null;
+      let el = $("#hero") || document.body;
+      let q = el.parentElement;
+      while (q && q !== document.documentElement) {
+        const st = getComputedStyle(q);
+        if (/(auto|scroll|overlay)/.test(st.overflowY) && q.scrollHeight > q.clientHeight + 4) { _host = q; break; }
+        q = q.parentElement;
+      }
+    }
+    return _host;
+  };
+  const scrollPos = () => { const h = scrollHost(); return h ? h.scrollTop : (window.scrollY || document.documentElement.scrollTop || 0); };
+  const viewH = () => { const h = scrollHost(); return h ? h.clientHeight : window.innerHeight; };
+  const onScroll2 = (fn) => { const h = scrollHost(); (h || window).addEventListener("scroll", fn, { passive: true }); if (h) window.addEventListener("scroll", fn, { passive: true }); };
+
   // ─── Nav ─────────────────────────────────────────────────────────────
   const nav = $(".nav");
-  const onScroll = () => nav.classList.toggle("is-scrolled", window.scrollY > 10);
-  onScroll(); window.addEventListener("scroll", onScroll, { passive: true });
+  const onScroll = () => nav.classList.toggle("is-scrolled", scrollPos() > 10);
+  onScroll(); onScroll2(onScroll);
 
   const toggle = $(".nav__toggle"), menu = $("#menu");
   if (toggle && menu) {
@@ -270,12 +290,12 @@
   if (steps && fill) {
     const cards = $$(".step", steps);
     const upd = () => {
-      const r = steps.getBoundingClientRect(), vh = window.innerHeight;
+      const r = steps.getBoundingClientRect(), vh = viewH();
       const p = Math.max(0, Math.min(1, (vh * 0.85 - r.top) / (r.height + vh * 0.2)));
       fill.style.width = (p * 100) + "%";
       cards.forEach((c, i) => c.classList.toggle("is-lit", p >= (i + 0.5) / cards.length));
     };
-    upd(); window.addEventListener("scroll", upd, { passive: true }); window.addEventListener("resize", upd);
+    upd(); onScroll2(upd); window.addEventListener("resize", upd);
   }
 
   // ─── Inclinación 3D en tarjetas de trabajos ──────────────────────────
@@ -355,8 +375,8 @@
   // ─── Barra CTA fija en móvil (aparece tras el hero, se oculta en contacto) ─
   const mcta = $("#mcta");
   if (mcta && hero) {
-    const upd = () => { const c = $("#contacto").getBoundingClientRect(); mcta.classList.toggle("is-on", window.scrollY > hero.offsetHeight * 0.8 && c.top > window.innerHeight * 0.6); };
-    upd(); window.addEventListener("scroll", upd, { passive: true });
+    const upd = () => { const c = $("#contacto").getBoundingClientRect(); mcta.classList.toggle("is-on", scrollPos() > hero.offsetHeight * 0.8 && c.top > viewH() * 0.6); };
+    upd(); onScroll2(upd);
   }
 
   // ─── Cambio de idioma: re-render de lo que genera JS ─────────────────

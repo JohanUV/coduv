@@ -29,7 +29,7 @@
     "}"
   ].join("\n");
 
-  const load = (src) => new Promise((res, rej) => { const i = new Image(); i.crossOrigin = "anonymous"; i.onload = () => res(i); i.onerror = rej; i.src = src; });
+  const load = (src) => new Promise((res, rej) => { const i = new Image(); if (/^https?:/i.test(src) && !src.startsWith(location.origin)) i.crossOrigin = "anonymous"; i.onload = () => res(i); i.onerror = rej; i.src = src; });
 
   const mouse = { x: 0, y: 0, tx: 0, ty: 0, active: false };
   window.addEventListener("pointermove", (e) => { mouse.tx = e.clientX; mouse.ty = e.clientY; mouse.active = true; }, { passive: true });
