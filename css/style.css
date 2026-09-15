@@ -213,7 +213,7 @@ h2.display { font-size: clamp(30px, 3.6vw, 52px); }
 .hero__points li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); }
 
 .hero__media { position: relative; display: grid; place-items: center; transform-style: preserve-3d; transition: transform 0.15s ease-out; will-change: transform; }
-.hero__media img { width: min(100%, 460px); filter: drop-shadow(0 30px 60px rgba(61, 139, 255, 0.35)); }
+.hero__media img { width: min(100%, 360px); filter: drop-shadow(0 30px 60px rgba(61, 139, 255, 0.35)); }
 .hero__media::before {
   content: "";
   position: absolute;
@@ -231,7 +231,7 @@ h2.display { font-size: clamp(30px, 3.6vw, 52px); }
   .hero { min-height: auto; }
   .hero__grid { grid-template-columns: minmax(0, 1fr); }
   .hero__stage { margin-top: 8px; }
-  .hero__media img { width: min(52%, 220px); }
+  .hero__media img { width: min(50%, 200px); }
 }
 
 /* ---------- marquee ---------- */
@@ -598,7 +598,7 @@ html.shot .hero__media img, html.shot .chip { animation: none; }
 /* ---------- gecko vivo ---------- */
 .gecko { position: relative; display: block; border: 0; background: none; padding: 0; cursor: pointer; border-radius: 40px; transform-origin: 50% 70%; animation: alive 6s ease-in-out infinite; -webkit-tap-highlight-color: transparent; }
 .gecko:focus-visible { outline: 2px solid var(--orange); outline-offset: 8px; }
-.gecko img { width: min(100%, 460px); pointer-events: none; }
+.gecko img { width: min(100%, 360px); pointer-events: none; }
 @keyframes alive {
   0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
   30% { transform: translateY(-10px) rotate(-1.2deg) scale(1.015); }
@@ -814,10 +814,6 @@ html.shot .viz__pk { animation: none; offset-distance: 60%; opacity: 1; }
 .viz--web, .viz--desk, .viz--care, .viz--auto, .viz--data, .viz--sys { position: relative; }
 .viz__cursor, .viz__toast, .viz__chip { z-index: 2; }
 
-/* ---------- Cody caminante (walker.js) ---------- */
-.walker { position: fixed; left: 0; top: 0; width: 124px; height: 124px; z-index: 45; pointer-events: none; opacity: 0; transition: opacity 0.4s; will-change: transform; filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.45)); }
-.walker svg { width: 100%; height: 100%; overflow: visible; }
-html.shot .walker { transition: none; }
 
 /* ---------- fundador: foto a la izquierda, b/n → color al pasar el mouse ---------- */
 .card.founder { display: grid; grid-template-columns: 200px 1fr; gap: 32px; align-items: center; }
@@ -830,25 +826,17 @@ html.shot .walker { transition: none; }
   .card.founder .card__tags { justify-content: center; }
 }
 @media (hover: none) { .founder__photo { filter: none; } }
-.walker { width: 136px; height: 136px; }
 
 /* ---------- móvil: gecko sin deformar, sin contorno al tocar ---------- */
-.gecko .depth { width: min(100%, 460px); margin-inline: auto; }
+.gecko .depth { width: min(100%, 360px); margin-inline: auto; }
 .gecko .depth img { width: 100%; }
 .gecko:focus { outline: none; }
 .gecko:focus-visible { outline: 2px solid var(--orange); outline-offset: 8px; }
 @media (max-width: 900px) {
-  .gecko .depth { width: min(56%, 230px); }
+  .gecko .depth { width: min(50%, 200px); }
   .gecko .depth img { width: 100%; margin: 0; }
   .hero__media { transform: none !important; }
   .hero { padding-top: 28px; }
-  .walker { width: 88px; height: 88px; z-index: 44; }
 }
 @media (max-width: 900px) { .wa-float { display: none; } .mcta { z-index: 61; } }
 
-/* ---------- Cody 3D (walker3d.js) ---------- */
-.walker3d { position: fixed; left: 0; top: 0; width: 100vw; height: 100vh; z-index: 45; pointer-events: none; opacity: 0; transition: opacity 0.4s; }
-/* crossfade del hero: gecko sobre la C → C vacía */
-.gecko { position: relative; }
-.gecko .depth--full { opacity: calc(1 - var(--swap, 0)); transition: opacity 0.35s; }
-.gecko.is-empty .gecko__lid { opacity: 0; }
