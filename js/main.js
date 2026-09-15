@@ -222,34 +222,6 @@
       if (lid) { lid.classList.remove("is-blink"); void lid.offsetWidth; lid.classList.add("is-blink"); }
     });
 
-    if (tilt && !hoverable && "DeviceOrientationEvent" in window && !reduced) {
-      const onOri = (ev) => {
-        if (ev.gamma == null) return;
-        const gx = Math.max(-25, Math.min(25, ev.gamma)), gy = Math.max(-25, Math.min(25, (ev.beta || 0) - 40));
-        tilt.style.transform = "perspective(900px) rotateY(" + (gx * 0.6) + "deg) rotateX(" + (-gy * 0.4) + "deg)";
-      };
-      if (typeof DeviceOrientationEvent.requestPermission === "function") {
-        gecko.addEventListener("click", () => DeviceOrientationEvent.requestPermission().then((r) => { if (r === "granted") window.addEventListener("deviceorientation", onOri); }).catch(() => {}), { once: true });
-      } else {
-        window.addEventListener("deviceorientation", onOri);
-      }
-    }
-
-    const mark = $(".brand__mark");
-    if (mark && hero && window.matchMedia("(min-width: 901px)").matches && !reduced) {
-      const fly = () => {
-        const h = hero.offsetHeight, p = Math.max(0, Math.min(1, window.scrollY / (h * 0.9)));
-        if (p === 0) { gecko.style.transform = ""; gecko.style.opacity = ""; mark.style.transform = ""; return; }
-        const g = gecko.getBoundingClientRect(), m = mark.getBoundingClientRect();
-        const e = 1 - Math.pow(1 - p, 3);
-        const dx = (m.left + m.width / 2) - (g.left + g.width / 2), dy = (m.top + m.height / 2) - (g.top + g.height / 2);
-        const sc = 1 - e * (1 - m.height / g.height);
-        gecko.style.transform = "translate(" + (dx * e) + "px," + (dy * e) + "px) scale(" + sc + ") rotate(" + (e * 360) + "deg)";
-        gecko.style.opacity = p > 0.92 ? String(1 - (p - 0.92) / 0.08) : "1";
-        mark.style.transform = p > 0.9 ? "scale(" + (1 + (1 - p) * 3) + ")" : "";
-      };
-      window.addEventListener("scroll", fly, { passive: true });
-    }
   }
 
   // ─── Contadores animados ─────────────────────────────────────────────

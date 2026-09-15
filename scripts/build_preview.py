@@ -11,11 +11,13 @@ def data(path):
 css=re.sub(r'url\("\.\./(img/[^"]+)"\)', lambda m:'url("'+data(m.group(1))+'")', css)
 html=re.sub(r'(src|href|data-depth)="(img/[^"]+)"', lambda m:f'{m.group(1)}="{data(m.group(2))}"', html)
 depth=open(f'{root}/js/depth.js').read()
+walker=open(f'{root}/js/walker.js').read()
 html=re.sub(r'content="(img/[^"]+)"', lambda m:f'content="{data(m.group(1))}"', html)
 html=re.sub(r'<link [^>]*href="css/style.css"[^>]*>','<style>\n'+css+'\n</style>',html)
 i18n=open(f'{root}/js/i18n.js').read()
 html=re.sub(r'<script [^>]*src="js/i18n.js"[^>]*></script>','<script>\n'+i18n+'\n</script>',html)
 html=re.sub(r'<script [^>]*src="js/depth.js"[^>]*></script>','<script>\n'+depth+'\n</script>',html)
+html=re.sub(r'<script [^>]*src="js/walker.js"[^>]*></script>','<script>\n'+walker+'\n</script>',html)
 html=re.sub(r'<script [^>]*src="js/main.js"[^>]*></script>','<script>\n'+js+'\n</script>',html)
 # quitar doctype/html/head/body: el artifact envuelve el contenido
 m=re.search(r'<head>(.*?)</head>',html,re.S); head=m.group(1)
