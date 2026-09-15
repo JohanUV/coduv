@@ -7,7 +7,10 @@
   const WHATSAPP = "593963607760";              // formato internacional sin espacios (wa.me)
   const FACEBOOK = "https://www.facebook.com/profile.php?id=61594049955441";
   const INSTAGRAM = "https://www.instagram.com/coduv.ec/";
-  const NOXIS_URL = "";                          // TODO: URL pública del sitio de Noxis
+  const NOXIS_URL = "https://noxisec.netlify.app/";
+  /* Testimonios reales. Añade objetos aquí y la sección aparece sola.
+     { stars: 5, es: "…", en: "…", name: "Nombre", role: "Negocio, ciudad" } */
+  const TESTIMONIOS = [];
   // ──────────────────────────────────────────────────────────────────────
 
   if (location.search.includes("shot")) document.documentElement.classList.add("shot");
@@ -376,7 +379,7 @@
 
   // ─── Barra CTA fija en móvil (aparece tras el hero, se oculta en contacto) ─
   const mcta = $("#mcta");
-  if (mcta && hero) {
+  if (mcta && hero && $("#contacto")) {
     const upd = () => { const c = $("#contacto").getBoundingClientRect(); mcta.classList.toggle("is-on", scrollPos() > hero.offsetHeight * 0.8 && c.top > viewH() * 0.6); };
     upd(); onScroll2(upd);
   }
@@ -387,6 +390,48 @@
     flowNext();
     if (window.CODUV_CHAT_RESTART) window.CODUV_CHAT_RESTART();
   });
+
+  // ─── Animación de entrada ────────────────────────────────────────────
+  const intro = $("#intro");
+  if (intro) {
+    let seen = false; try { seen = sessionStorage.getItem("coduv-intro") === "1"; } catch (e) {}
+    if (seen || reduced) { intro.remove(); }
+    else {
+      document.documentElement.classList.add("intro-on");
+      const close = () => {
+        if (!intro.isConnected) return;
+        intro.classList.add("is-out");
+        document.documentElement.classList.remove("intro-on");
+        try { sessionStorage.setItem("coduv-intro", "1"); } catch (e) {}
+        setTimeout(() => intro.remove(), 1000);
+      };
+      setTimeout(close, 1850);
+      intro.addEventListener("click", close);
+      window.addEventListener("keydown", close, { once: true });
+      window.addEventListener("wheel", close, { once: true, passive: true });
+      window.addEventListener("touchstart", close, { once: true, passive: true });
+    }
+  }
+
+  // ─── Testimonios ─────────────────────────────────────────────────────
+  const quotes = $("#quotes"), testSection = $("#testimonios");
+  if (quotes && testSection) {
+    const paint = () => {
+      if (!TESTIMONIOS.length) { testSection.hidden = true; return; }
+      const en = I18N() && I18N().lang === "en";
+      testSection.hidden = false;
+      quotes.innerHTML = TESTIMONIOS.map((t) => {
+        const stars = "★".repeat(Math.max(1, Math.min(5, t.stars || 5))) + "☆".repeat(5 - Math.max(1, Math.min(5, t.stars || 5)));
+        const text = (en && t.en) ? t.en : t.es;
+        const initial = (t.name || "?").trim().charAt(0).toUpperCase();
+        return '<figure class="quote reveal"><div class="quote__stars" aria-label="' + (t.stars || 5) + '/5">' + stars + '</div>' +
+          '<blockquote class="quote__text">' + text + '</blockquote>' +
+          '<figcaption class="quote__who"><span class="quote__av">' + initial + '</span><span><b>' + t.name + '</b><small>' + (t.role || "") + '</small></span></figcaption></figure>';
+      }).join("");
+      $$(".quote", quotes).forEach((q) => q.classList.add("is-in"));
+    };
+    paint(); window.addEventListener("coduv:lang", paint);
+  }
 
   // FAQ: solo una abierta a la vez
   const faqs = $$(".faq details");

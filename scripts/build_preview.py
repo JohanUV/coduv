@@ -14,6 +14,7 @@ depth=open(f'{root}/js/depth.js').read()
 gdata=('window.CODUV_GECKO = { binB64: "'+base64.b64encode(open(f'{root}/img/gecko/gecko.bin','rb').read()).decode()+'", cB64: "'+base64.b64encode(open(f'{root}/img/gecko/c.bin','rb').read()).decode()+'" };') if os.path.exists(f'{root}/img/gecko/gecko.bin') else ''
 walker3d=open(f'{root}/js/walker3d.js').read()
 html=re.sub(r'content="(img/[^"]+)"', lambda m:f'content="{data(m.group(1))}"', html)
+html=html.replace('href="sobre.html"','href="https://coduv.vercel.app/sobre" target="_blank" rel="noopener"')
 html=re.sub(r'<link [^>]*href="css/style.css"[^>]*>', lambda m: '<style>\n'+css+'\n</style>', html)
 i18n=open(f'{root}/js/i18n.js').read()
 html=re.sub(r'<script [^>]*src="js/i18n.js"[^>]*></script>', lambda m: '<script>\n'+i18n+'\n</script>', html)
