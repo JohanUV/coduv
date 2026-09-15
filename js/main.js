@@ -5,7 +5,8 @@
 
   // ─── DATOS ────────────────────────────────────────────────────────────
   const WHATSAPP = "593963607760";              // formato internacional sin espacios (wa.me)
-  const FACEBOOK = "https://www.facebook.com/"; // TODO: URL de la página de Facebook de CODUV
+  const FACEBOOK = "https://www.facebook.com/profile.php?id=61594049955441";
+  const INSTAGRAM = "https://www.instagram.com/coduv.ec/";
   const NOXIS_URL = "";                          // TODO: URL pública del sitio de Noxis
   // ──────────────────────────────────────────────────────────────────────
 
@@ -24,6 +25,7 @@
   const applyWa = () => $$(".js-wa").forEach((a) => { a.href = waLink(MSG_DEFAULT()); a.target = "_blank"; a.rel = "noopener"; });
   applyWa();
   $$(".js-fb").forEach((a) => { a.href = FACEBOOK; });
+  $$(".js-ig").forEach((a) => { a.href = INSTAGRAM; });
   const applyNoxis = () => $$(".js-noxis").forEach((a) => {
     if (NOXIS_URL) { a.href = NOXIS_URL; a.target = "_blank"; a.rel = "noopener"; }
     else { a.textContent = T("recent", "Entrega reciente"); a.removeAttribute("href"); a.style.color = "var(--muted)"; }
