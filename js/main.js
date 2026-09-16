@@ -25,7 +25,11 @@
   const MSG_DEFAULT = () => (I18N() ? I18N().waDefault() : "Hola CODUV, quiero un diagnóstico sin costo para mi negocio.");
 
   // Enlaces de WhatsApp / Facebook / Noxis
-  const applyWa = () => $$(".js-wa").forEach((a) => { a.href = waLink(MSG_DEFAULT()); a.target = "_blank"; a.rel = "noopener"; });
+  const applyWa = () => $$(".js-wa").forEach((a) => {
+    const key = a.dataset.i18n === "test.wa" ? "waReview" : null;
+    a.href = waLink(key && I18N() ? I18N().t(key) : MSG_DEFAULT());
+    a.target = "_blank"; a.rel = "noopener";
+  });
   applyWa();
   $$(".js-fb").forEach((a) => { a.href = FACEBOOK; });
   $$(".js-ig").forEach((a) => { a.href = INSTAGRAM; });
@@ -414,12 +418,12 @@
   }
 
   // ─── Testimonios ─────────────────────────────────────────────────────
-  const quotes = $("#quotes"), testSection = $("#testimonios");
+  const quotes = $("#quotes"), testSection = $("#testimonios"), quotesEmpty = $("#quotesEmpty");
   if (quotes && testSection) {
     const paint = () => {
-      if (!TESTIMONIOS.length) { testSection.hidden = true; return; }
+      if (!TESTIMONIOS.length) { quotes.innerHTML = ""; if (quotesEmpty) quotesEmpty.hidden = false; return; }
+      if (quotesEmpty) quotesEmpty.hidden = true;
       const en = I18N() && I18N().lang === "en";
-      testSection.hidden = false;
       quotes.innerHTML = TESTIMONIOS.map((t) => {
         const stars = "★".repeat(Math.max(1, Math.min(5, t.stars || 5))) + "☆".repeat(5 - Math.max(1, Math.min(5, t.stars || 5)));
         const text = (en && t.en) ? t.en : t.es;

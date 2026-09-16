@@ -894,3 +894,15 @@ html.shot .intro { display: none; }
 /* ---------- portada de la página secundaria ---------- */
 .subhero { padding-block: clamp(48px, 7vw, 92px) clamp(24px, 3vw, 40px); }
 .subhero h1 { margin: 18px 0 16px; }
+
+/* ---------- estado sin reseñas ---------- */
+.quotes:empty { display: none; }
+.quotes__empty { display: grid; place-items: center; }
+.quotes__note {
+  max-width: 640px; text-align: center; padding: clamp(26px, 4vw, 40px);
+  border-radius: var(--radius); border: 1px dashed var(--line-2);
+  background: rgba(8, 15, 32, 0.6); color: var(--muted);
+}
+.quotes__big { font-family: var(--font-display); font-weight: 700; font-size: clamp(19px, 2.2vw, 24px); letter-spacing: -0.02em; color: var(--text); margin-bottom: 10px; }
+.quotes__note p { font-size: 15px; }
+.quotes__cta { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px; }

@@ -41,6 +41,7 @@
         ["Reporte del día en tu correo a las 20:00", "Correo"] ] }
     ],
     waDefault: "Hola CODUV, quiero un diagnóstico sin costo para mi negocio.",
+    waReview: "Hola CODUV, quiero dejarles una reseña de mi experiencia.",
     calcMsg: (h, m) => "Hola CODUV, según la calculadora pierdo unas " + h + " horas al mes (unos $" + m + ") en trabajo repetitivo. Quiero un diagnóstico sin costo para recuperarlas.",
     recent: "Entrega reciente",
     menuOpen: "Abrir menú", menuClose: "Cerrar menú",
@@ -101,6 +102,7 @@
         ["Daily report in your inbox at 8:00 pm", "Email"] ] }
     ],
     waDefault: "Hi CODUV, I'd like a free diagnosis for my business.",
+    waReview: "Hi CODUV, I'd like to leave a review of my experience.",
     calcMsg: (h, m) => "Hi CODUV, according to the calculator I lose about " + h + " hours a month (around $" + m + ") on repetitive work. I'd like a free diagnosis to get them back.",
     recent: "Recent delivery",
     menuOpen: "Open menu", menuClose: "Close menu",
@@ -296,7 +298,10 @@
       "top.about": "About CODUV",
       "sobre.eyebrow": "About CODUV", "sobre.title": 'Who builds <span class="accent">your systems</span>',
       "sobre.lead": "How we work, what we believe, and what we have built on our own to prove what we can do.",
-      "test.eyebrow": "What they say", "test.title": 'Clients already <span class="accent">working with us</span>',
+      "test.eyebrow": "Reviews", "test.title": 'What people who <span class="accent">already worked</span> with CODUV say',
+      "test.emptyTitle": "We're collecting our first reviews.",
+      "test.emptyBody": "In the meantime the proof is above: all five sites are live and you can open every one. If we've worked together, leave your review and we'll publish it here with your name and business.",
+      "test.fb": "Review us on Facebook", "test.wa": "Send my review on WhatsApp",
       "viz.order": "Order", "viz.log": "Logged", "viz.toast": "+1 message",
       "viz.t1": "&gt; query: today's sales", "viz.t2": "local model · 0 data sent", "viz.t3": "✓ 37 sales · $1,240 · 2 pending",
       "viz.off": "No internet", "viz.cpu": "Local CPU", "viz.status": "Status", "viz.online": "Online",
