@@ -395,6 +395,18 @@
     if (window.CODUV_CHAT_RESTART) window.CODUV_CHAT_RESTART();
   });
 
+  // ─── Cinta de clientes: botón de pausa (contenido auto-rotativo) ─────
+  const mq = $("#clientsMarquee"), mqBtn = $("#marqueePause");
+  if (mq && mqBtn) {
+    let paused = false;
+    mqBtn.addEventListener("click", () => {
+      paused = !paused;
+      mq.classList.toggle("is-paused", paused);
+      mqBtn.setAttribute("aria-pressed", String(paused));
+      mqBtn.setAttribute("aria-label", T(paused ? "playStrip" : "pauseStrip", paused ? "Reanudar el desplazamiento de la cinta" : "Pausar el desplazamiento de la cinta"));
+    });
+  }
+
   // ─── Animación de entrada ────────────────────────────────────────────
   const intro = $("#intro");
   if (intro) {

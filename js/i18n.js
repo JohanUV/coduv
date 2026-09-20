@@ -45,6 +45,7 @@
     calcMsg: (h, m) => "Hola CODUV, según la calculadora pierdo unas " + h + " horas al mes (unos $" + m + ") en trabajo repetitivo. Quiero un diagnóstico sin costo para recuperarlas.",
     recent: "Entrega reciente",
     menuOpen: "Abrir menú", menuClose: "Cerrar menú",
+    pauseStrip: "Pausar el desplazamiento de la cinta", playStrip: "Reanudar el desplazamiento de la cinta",
     chat: {
       state: { online: "en línea", typing: "escribiendo…" },
       step: "Paso {n} de 3",
@@ -106,6 +107,7 @@
     calcMsg: (h, m) => "Hi CODUV, according to the calculator I lose about " + h + " hours a month (around $" + m + ") on repetitive work. I'd like a free diagnosis to get them back.",
     recent: "Recent delivery",
     menuOpen: "Open menu", menuClose: "Close menu",
+    pauseStrip: "Pause the scrolling strip", playStrip: "Resume the scrolling strip",
     chat: {
       state: { online: "online", typing: "typing…" },
       step: "Step {n} of 3",
@@ -293,7 +295,7 @@
       "x.span1": "Message us",
       "aria.nav__toggle": "Open menu",
       "aria.gecko": "Cody, CODUV's mascot. Tap him.",
-      "aria.wa-float": "Write on WhatsApp",
+      "aria.wa-float": "Write on WhatsApp", "aria.pause": "Pause the scrolling strip",
       "ph.chatText": "E.g.: hardware store in Miami",
       "top.about": "About CODUV",
       "sobre.eyebrow": "About CODUV", "sobre.title": 'Who builds <span class="accent">your systems</span>',
