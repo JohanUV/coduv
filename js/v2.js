@@ -39,10 +39,11 @@
       [desk, mob].forEach((set) => set.forEach((img, k) => img.classList.toggle("is-on", k === n)));
       url.textContent = desk[n].dataset.site;
     };
-    let timer = setInterval(() => { i = (i + 1) % desk.length; show(i); }, 3200);
+    const tick = () => { if (stage.classList.contains("is-demo")) return; i = (i + 1) % desk.length; show(i); };
+    let timer = setInterval(tick, 3200);
     document.addEventListener("visibilitychange", () => {
       clearInterval(timer);
-      if (!document.hidden) timer = setInterval(() => { i = (i + 1) % desk.length; show(i); }, 3200);
+      if (!document.hidden) timer = setInterval(tick, 3200);
     });
   }
 
@@ -57,13 +58,55 @@
     $$(".work__shot").forEach((s) => io.observe(s));
   }
 
-  // Aparición al hacer scroll
-  if (reduced || !("IntersectionObserver" in window)) {
-    $$(".reveal").forEach((el) => el.classList.add("is-in"));
-  } else {
-    const io = new IntersectionObserver((es) => es.forEach((e) => {
-      if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); }
-    }), { rootMargin: "0px 0px -8% 0px" });
-    $$(".reveal").forEach((el) => io.observe(el));
+  // Prueba tu web: vista previa con el nombre del visitante
+  const RUBROS = {
+    restaurante: { bg: "#1a0f0a", fg: "#fbefe3", acc: "#ff8a3d", art: "#3a1f12", k: "Comida casera", h: "Pide tu almuerzo sin hacer fila", p: "Mira el menú del día, elige y recibe tu pedido por WhatsApp.", cta: "Ver el menú", tag: "Menú de hoy", items: ["Menú del día", "A domicilio", "Reservas"] },
+    tienda: { bg: "#f6f3ee", fg: "#1b1b1b", acc: "#1f6feb", art: "#e3ddd2", k: "Tienda en línea", h: "Todo el catálogo en tu celular", p: "Elige productos, arma tu pedido y confirma por WhatsApp.", cta: "Ver catálogo", tag: "Nuevos ingresos", items: ["Catálogo", "Envíos a todo el país", "Pago contra entrega"] },
+    belleza: { bg: "#1b1216", fg: "#fbe9ef", acc: "#f472b6", art: "#3a2230", k: "Salón y estética", h: "Reserva tu cita en un minuto", p: "Elige el servicio y la hora, y te confirmamos por WhatsApp.", cta: "Reservar cita", tag: "Citas hoy", items: ["Cortes y color", "Uñas", "Tratamientos"] },
+    taller: { bg: "#111418", fg: "#eef1f4", acc: "#fbbf24", art: "#262c33", k: "Taller mecánico", h: "Tu carro en buenas manos", p: "Cotiza el arreglo, agenda el turno y sigue el avance por WhatsApp.", cta: "Cotizar arreglo", tag: "Turnos libres", items: ["Mantenimiento", "Frenos y suspensión", "Diagnóstico"] },
+    salud: { bg: "#f2f7f7", fg: "#0f2a2e", acc: "#0d9488", art: "#d6e8e8", k: "Consultorio", h: "Agenda tu consulta sin llamar", p: "Elige especialidad y horario. Te confirmamos por WhatsApp.", cta: "Agendar consulta", tag: "Horarios", items: ["Medicina general", "Odontología", "Exámenes"] },
+    gimnasio: { bg: "#0c0c0c", fg: "#f5f5f5", acc: "#facc15", art: "#222", k: "Entrenamiento", h: "Tu primera clase va por nuestra cuenta", p: "Conoce los planes y reserva tu clase de prueba por WhatsApp.", cta: "Clase de prueba", tag: "Clases hoy", items: ["Planes", "Horarios", "Entrenadores"] },
+    transporte: { bg: "#0d1b2a", fg: "#e9f1fa", acc: "#38bdf8", art: "#1b2f45", k: "Transporte turístico", h: "Viaja seguro a cualquier destino", p: "Cotiza tu viaje con la ruta y el número de pasajeros.", cta: "Cotizar viaje", tag: "Flota propia", items: ["Excursiones", "Empresas", "Aeropuerto"] },
+    otro: { bg: "#101114", fg: "#f1f2f4", acc: "#c8f560", art: "#22252b", k: "Tu negocio en internet", h: "Clientes nuevos todos los días", p: "Muestra lo que haces y recibe pedidos directo en tu WhatsApp.", cta: "Escríbenos", tag: "Abierto hoy", items: ["Servicios", "Precios", "Ubicación"] },
+  };
+  const tryForm = document.getElementById("try");
+  if (tryForm && stage) {
+    const nameIn = document.getElementById("try-name");
+    const kindIn = document.getElementById("try-kind");
+    const go = tryForm.querySelector(".js-try-wa");
+    const esc = (t) => t.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+    const render = () => {
+      const name = nameIn.value.trim();
+      const r = RUBROS[kindIn.value];
+      const on = name.length > 0;
+      stage.classList.toggle("is-demo", on);
+      go.hidden = !on;
+      if (!on) { const cur = stage.querySelector(".stage__desk img.is-on"); if (cur) stage.querySelector("[data-url]").textContent = cur.dataset.site; return; }
+      const n = esc(name);
+      const html = `<div class="demo__nav"><span class="demo__brand">${n}</span><span class="demo__links"><span>Inicio</span><span>Servicios</span><span>Contacto</span></span></div>
+        <div class="demo__hero"><div><div class="demo__k">${r.k}</div><div class="demo__h">${r.h}</div><div class="demo__p">${r.p}</div><span class="demo__cta">${r.cta}</span></div>
+        <div class="demo__art"><span></span><span></span><b>${r.tag}</b></div></div>
+        <div class="demo__items">${r.items.map((i) => `<div>${i}</div>`).join("")}</div><span class="demo__wa"></span>`;
+      stage.querySelectorAll("[data-demo]").forEach((d) => {
+        d.innerHTML = html;
+        ["bg", "fg", "acc", "art"].forEach((k) => d.style.setProperty("--d-" + k, r[k]));
+      });
+      const slug = name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "") || "tunegocio";
+      stage.querySelector("[data-url]").textContent = slug + ".com";
+      go.querySelector("[data-try-name]").textContent = name;
+      const msg = `Hola coduv.dev, tengo un negocio de ${kindIn.options[kindIn.selectedIndex].text.toLowerCase()} llamado "${name}" y quiero una web como la que vi en su página.`;
+      go.href = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(msg);
+      go.target = "_blank"; go.rel = "noopener";
+    };
+    nameIn.addEventListener("input", render);
+    kindIn.addEventListener("change", render);
+    tryForm.addEventListener("submit", (e) => { e.preventDefault(); if (!go.hidden) go.click(); });
+  }
+
+  // Barra fija en celular: aparece después de la portada
+  const bar = document.querySelector(".bar");
+  const hero = document.querySelector(".hero");
+  if (bar && hero && "IntersectionObserver" in window) {
+    new IntersectionObserver(([e]) => bar.classList.toggle("is-on", !e.isIntersecting), { threshold: 0.05 }).observe(hero);
   }
 })();
