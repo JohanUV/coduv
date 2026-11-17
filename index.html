@@ -10,17 +10,17 @@
 <meta property="og:title" content="coduv.dev · Webs que convierten visitas en clientes">
 <meta property="og:description" content="Sitios web, sistemas a medida y automatización para negocios que atienden por WhatsApp. Cinco negocios ya reciben clientes con sitios hechos por coduv.dev.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://coduv.vercel.app/img/v2/og.png">
+<meta property="og:image" content="https://coduv.vercel.app/img/v2/og.jpg">
 <meta property="og:locale" content="es_EC">
 <meta property="og:url" content="https://coduv.vercel.app/">
 <link rel="canonical" href="https://coduv.vercel.app/">
 <link rel="icon" href="img/v2/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="img/brand/mark-160.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="img/v2/cottullari.webp" type="image/webp">
-<link rel="stylesheet" href="css/v2.css">
+<link rel="preload" as="font" href="fonts/archivo-100-900-normal-latin.woff2" type="font/woff2" crossorigin>
+<link rel="preload" as="image" href="img/v2/cottullari.webp" type="image/webp" fetchpriority="high">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="stylesheet" href="css/fonts.css?v=3">
+<link rel="stylesheet" href="css/v2.css?v=3">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -28,7 +28,7 @@
   "name": "coduv.dev",
   "alternateName": "CODUV",
   "url": "https://coduv.vercel.app/",
-  "image": "https://coduv.vercel.app/img/v2/og.png",
+  "image": "https://coduv.vercel.app/img/v2/og.jpg",
   "description": "Estudio de desarrollo web: sitios web, sistemas a medida y automatización.",
   "telephone": "+593963607760",
   "email": "jaren22uv@gmail.com",
@@ -95,6 +95,7 @@
             <option value="otro">Otro</option>
           </select>
         </div>
+        <label class="try__logo"><input type="file" id="try-logo" accept="image/*"><span>Subir mi logo (opcional)</span></label>
         <a class="try__go js-try-wa" href="#contacto" hidden>Quiero esta web para <b data-try-name></b></a>
       </form>
     </div>
@@ -105,20 +106,20 @@
         <div class="browser__view">
           <div class="demo" data-demo aria-live="polite"></div>
           <img class="is-on" src="img/v2/cottullari.webp" alt="Portada de cottullari.com" width="1600" height="1000" data-site="cottullari.com">
-          <img src="img/v2/juliuspitkennel.webp" alt="Portada de JULIUSPITKENNEL" width="1600" height="1000" loading="lazy" data-site="juliuspitkennel.vercel.app">
-          <img src="img/v2/noxis.webp" alt="Portada de Noxis" width="1600" height="1000" loading="lazy" data-site="noxisec.netlify.app">
-          <img src="img/v2/moduform.webp" alt="Portada de ModuForm" width="1600" height="1000" loading="lazy" data-site="moduform.vercel.app">
-          <img src="img/v2/mashka.webp" alt="Portada de Mashka Box" width="1600" height="1000" loading="lazy" data-site="mashka-box">
+          <img data-src="img/v2/juliuspitkennel.webp" alt="Portada de JULIUSPITKENNEL" width="1600" height="1000" data-site="juliuspitkennel.vercel.app">
+          <img data-src="img/v2/noxis.webp" alt="Portada de Noxis" width="1600" height="1000" data-site="noxisec.netlify.app">
+          <img data-src="img/v2/moduform.webp" alt="Portada de ModuForm" width="1600" height="1000" data-site="moduform.vercel.app">
+          <img data-src="img/v2/mashka.webp" alt="Portada de Mashka Box" width="1600" height="1000" data-site="mashka-box">
         </div>
       </div>
       <div class="phone stage__mob">
         <div class="phone__view">
           <div class="demo demo--mob" data-demo></div>
           <img class="is-on" src="img/v2/cottullari-mob.webp" alt="" width="640" height="1385">
-          <img src="img/v2/juliuspitkennel-mob.webp" alt="" width="640" height="1385" loading="lazy">
-          <img src="img/v2/noxis-mob.webp" alt="" width="640" height="1385" loading="lazy">
-          <img src="img/v2/moduform-mob.webp" alt="" width="640" height="1385" loading="lazy">
-          <img src="img/v2/mashka-mob.webp" alt="" width="640" height="1385" loading="lazy">
+          <img data-src="img/v2/juliuspitkennel-mob.webp" alt="" width="640" height="1385">
+          <img data-src="img/v2/noxis-mob.webp" alt="" width="640" height="1385">
+          <img data-src="img/v2/moduform-mob.webp" alt="" width="640" height="1385">
+          <img data-src="img/v2/mashka-mob.webp" alt="" width="640" height="1385">
         </div>
       </div>
       <div class="stage__chip"><span class="dot dot--live"></span>En producción</div>
@@ -158,7 +159,7 @@
       </article>
 
       <article class="work reveal">
-        <a class="work__shot" href="https://juliuspitkennel.vercel.app/" target="_blank" rel="noopener" aria-label="Abrir JULIUSPITKENNEL">
+        <a class="work__shot" href="https://juliuspitkennel.vercel.app/" target="_blank" rel="noopener" aria-label="Abrir juliuspitkennel.vercel.app">
           <div class="browser"><div class="browser__bar"><i></i><i></i><i></i><span class="browser__url">juliuspitkennel.vercel.app</span></div>
           <div class="browser__view scroll"><img src="img/v2/juliuspitkennel-full.webp" alt="Página completa de JULIUSPITKENNEL" loading="lazy" width="900"></div></div>
         </a>
@@ -171,7 +172,7 @@
       </article>
 
       <article class="work reveal">
-        <a class="work__shot" href="https://noxisec.netlify.app/" target="_blank" rel="noopener" aria-label="Abrir Noxis">
+        <a class="work__shot" href="https://noxisec.netlify.app/" target="_blank" rel="noopener" aria-label="Abrir noxisec.netlify.app">
           <div class="browser"><div class="browser__bar"><i></i><i></i><i></i><span class="browser__url">noxisec.netlify.app</span></div>
           <div class="browser__view scroll"><img src="img/v2/noxis-full.webp" alt="Página completa de Noxis" loading="lazy" width="900"></div></div>
         </a>
@@ -184,7 +185,7 @@
       </article>
 
       <article class="work reveal">
-        <a class="work__shot" href="https://moduform.vercel.app/" target="_blank" rel="noopener" aria-label="Abrir ModuForm">
+        <a class="work__shot" href="https://moduform.vercel.app/" target="_blank" rel="noopener" aria-label="Abrir moduform.vercel.app">
           <div class="browser"><div class="browser__bar"><i></i><i></i><i></i><span class="browser__url">moduform.vercel.app</span></div>
           <div class="browser__view scroll"><img src="img/v2/moduform-full.webp" alt="Página completa de ModuForm" loading="lazy" width="900"></div></div>
         </a>
@@ -197,7 +198,7 @@
       </article>
 
       <article class="work reveal">
-        <a class="work__shot" href="https://johanuv.github.io/mashka-box/" target="_blank" rel="noopener" aria-label="Abrir Mashka Box">
+        <a class="work__shot" href="https://johanuv.github.io/mashka-box/" target="_blank" rel="noopener" aria-label="Abrir mashka-box">
           <div class="browser"><div class="browser__bar"><i></i><i></i><i></i><span class="browser__url">mashka-box</span></div>
           <div class="browser__view scroll"><img src="img/v2/mashka-full.webp" alt="Página completa de Mashka Box" loading="lazy" width="900"></div></div>
         </a>
@@ -240,6 +241,26 @@
         <ul class="ticks"><li>n8n · WhatsApp · Sheets</li><li>IA donde aporta</li></ul>
       </article>
     </div>
+    <div class="prices" id="precios">
+      <article class="price price--main">
+        <h3>Landing para WhatsApp</h3>
+        <p class="price__n"><small>desde</small> $100</p>
+        <p>Una página con lo que ofreces, tu ubicación en el mapa y el botón que abre tu WhatsApp con el mensaje listo.</p>
+        <p class="price__t">Lista en 3 a 7 días</p>
+      </article>
+      <article class="price">
+        <h3>Web de negocio o catálogo</h3>
+        <p class="price__n"><small>desde</small> $250</p>
+        <p>Varias secciones, catálogo de productos o servicios y un cotizador que te pasa cada pedido ya ordenado.</p>
+        <p class="price__t">Lista en 1 a 2 semanas</p>
+      </article>
+      <article class="price price--alt">
+        <h3>Mantenimiento</h3>
+        <p class="price__n">$10 a $20<small> al mes</small></p>
+        <p>Cambios de textos y fotos, respaldos, dominio y hosting al día. Opcional: puedes contratarlo cuando quieras.</p>
+        <p class="price__t">Automatizaciones y sistemas a medida se cotizan según el caso</p>
+      </article>
+    </div>
     <p class="also">También: integración con portales y APIs, apps de escritorio con IA local, y mantenimiento de dominio, hosting y respaldos.</p>
   </div>
 </section>
@@ -264,6 +285,8 @@
         <li><strong>Precio cerrado.</strong> Si el alcance no cambia, el precio tampoco.</li>
         <li><strong>Se entrega como se acordó.</strong> Revisamos hasta que coincida, sin costo extra.</li>
         <li><strong>Todo a tu nombre.</strong> Dominio, hosting, accesos y código son tuyos. Sin permanencias.</li>
+        <li><strong>Pagas la mitad al empezar.</strong> El 50 % al iniciar y el otro 50 % cuando tu web ya está publicada.</li>
+        <li><strong>A tiempo o te devuelvo el anticipo.</strong> Si tu landing o web de negocio no está publicada en el plazo acordado, te devuelvo lo que pagaste.</li>
       </ul>
     </div>
   </div>
@@ -277,7 +300,9 @@
       <h2>Lo que todos preguntan <em>antes de empezar</em>.</h2>
     </div>
     <div class="faq__list">
-      <details><summary>¿Cuánto cuesta una página web?</summary><p>Depende del alcance, por eso el primer paso es el diagnóstico sin costo. Después recibes una propuesta con precio fijo en dólares antes de que se construya nada. Una landing de una página cuesta mucho menos que un sistema con base de datos y usuarios.</p></details>
+      <details><summary>¿Cuánto cuesta una página web?</summary><p>Una landing para WhatsApp parte de $100 y una web de negocio o catálogo de $250. El precio final depende de lo que necesites, y lo recibes por escrito y cerrado antes de empezar.</p></details>
+      <details><summary>¿Cuánto pago al mes después?</summary><p>Nada obligatorio. Las webs que hacemos se publican en servicios sin costo mensual; solo pagas el dominio (.com), unos $12 a $15 al año. Si quieres que nosotros hagamos los cambios y respaldos, el mantenimiento cuesta de $10 a $20 al mes.</p></details>
+      <details><summary>¿Hay que dar anticipo?</summary><p>Sí: el 50 % al empezar y el 50 % cuando tu web está publicada. Si no está lista en el plazo acordado, te devolvemos el anticipo.</p></details>
       <details><summary>¿Cuánto se demora?</summary><p>Una landing o web corporativa suele estar lista en una a dos semanas. Un sistema a medida se entrega por fases, con una primera versión utilizable en pocas semanas.</p></details>
       <details><summary>¿Necesito dominio y hosting?</summary><p>No. Te ayudamos a comprar el dominio a tu nombre y configuramos el hosting. Para webs estáticas usamos servicios sin costo mensual.</p></details>
       <details><summary>¿Qué pasa si después quiero cambiar algo?</summary><p>Los cambios pequeños de contenido entran en el soporte. Las funciones nuevas se cotizan aparte, por escrito. Y como el código es tuyo, cualquier desarrollador podría continuarlo.</p></details>
@@ -321,6 +346,6 @@
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.4.6-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg>
 </a>
 
-<script src="js/v2.js" defer></script>
+<script src="js/v2.js?v=3" defer></script>
 </body>
 </html>

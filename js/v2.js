@@ -1,6 +1,9 @@
 // coduv.dev · v2
 (() => {
   const WHATSAPP = "593963607760"; // formato internacional sin espacios (wa.me)
+  // Medición: pega aquí los IDs cuando los tengas. Vacíos = no se carga nada.
+  const META_PIXEL_ID = ""; // Administrador de eventos de Meta, ej. "123456789012345"
+  const GA_ID = "";         // Google Analytics 4, ej. "G-XXXXXXXXXX"
   const MSG = "Hola coduv.dev, quiero cotizar una web para mi negocio.";
   const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -10,6 +13,24 @@
     a.href = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(a.dataset.msg || MSG);
     a.target = "_blank";
     a.rel = "noopener";
+  });
+
+  if (META_PIXEL_ID) {
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");
+    fbq("init", META_PIXEL_ID); fbq("track", "PageView");
+  }
+  if (GA_ID) {
+    const g = document.createElement("script"); g.async = true; g.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID; document.head.appendChild(g);
+    window.dataLayer = window.dataLayer || []; window.gtag = function () { dataLayer.push(arguments); };
+    gtag("js", new Date()); gtag("config", GA_ID);
+  }
+  // Cada clic que abre WhatsApp cuenta como contacto (Lead)
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest('a[href^="https://wa.me/"]');
+    if (!a) return;
+    const where = a.classList.contains("js-try-wa") ? "vista_previa" : (a.closest(".bar,.fab") ? "boton_fijo" : "boton");
+    if (window.fbq) fbq("track", "Lead", { content_name: where });
+    if (window.gtag) gtag("event", "generate_lead", { method: "whatsapp", lugar: where });
   });
 
   const y = document.getElementById("year");
@@ -35,7 +56,10 @@
     const mob = $$(".stage__mob img", stage);
     const url = stage.querySelector("[data-url]");
     let i = 0;
+    const load = (n) => [desk[n], mob[n]].forEach((img) => { if (img && img.dataset.src) { img.src = img.dataset.src; delete img.dataset.src; } });
+    load(1);
     const show = (n) => {
+      load(n); load((n + 1) % desk.length);
       [desk, mob].forEach((set) => set.forEach((img, k) => img.classList.toggle("is-on", k === n)));
       url.textContent = desk[n].dataset.site;
     };
@@ -74,6 +98,15 @@
     const nameIn = document.getElementById("try-name");
     const kindIn = document.getElementById("try-kind");
     const go = tryForm.querySelector(".js-try-wa");
+    const logoIn = document.getElementById("try-logo");
+    let logoUrl = "";
+    logoIn.addEventListener("change", () => {
+      const f = logoIn.files && logoIn.files[0];
+      if (logoUrl) URL.revokeObjectURL(logoUrl);
+      logoUrl = f && f.type.startsWith("image/") ? URL.createObjectURL(f) : "";
+      if (logoUrl && !nameIn.value.trim()) nameIn.value = "Mi negocio";
+      render();
+    });
     const esc = (t) => t.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
     const render = () => {
       const name = nameIn.value.trim();
@@ -83,9 +116,10 @@
       go.hidden = !on;
       if (!on) { const cur = stage.querySelector(".stage__desk img.is-on"); if (cur) stage.querySelector("[data-url]").textContent = cur.dataset.site; return; }
       const n = esc(name);
-      const html = `<div class="demo__nav"><span class="demo__brand">${n}</span><span class="demo__links"><span>Inicio</span><span>Servicios</span><span>Contacto</span></span></div>
+      const logo = logoUrl ? `<img src="${logoUrl}" alt="">` : "";
+      const html = `<div class="demo__nav"><span class="demo__brand">${logo}${n}</span><span class="demo__links"><span>Inicio</span><span>Servicios</span><span>Contacto</span></span></div>
         <div class="demo__hero"><div><div class="demo__k">${r.k}</div><div class="demo__h">${r.h}</div><div class="demo__p">${r.p}</div><span class="demo__cta">${r.cta}</span></div>
-        <div class="demo__art"><span></span><span></span><b>${r.tag}</b></div></div>
+        <div class="demo__art">${logoUrl ? logo : "<span></span><span></span>"}<b>${r.tag}</b></div></div>
         <div class="demo__items">${r.items.map((i) => `<div>${i}</div>`).join("")}</div><span class="demo__wa"></span>`;
       stage.querySelectorAll("[data-demo]").forEach((d) => {
         d.innerHTML = html;
@@ -103,10 +137,4 @@
     tryForm.addEventListener("submit", (e) => { e.preventDefault(); if (!go.hidden) go.click(); });
   }
 
-  // Barra fija en celular: aparece después de la portada
-  const bar = document.querySelector(".bar");
-  const hero = document.querySelector(".hero");
-  if (bar && hero && "IntersectionObserver" in window) {
-    new IntersectionObserver(([e]) => bar.classList.toggle("is-on", !e.isIntersecting), { threshold: 0.05 }).observe(hero);
-  }
 })();
