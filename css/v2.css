@@ -331,3 +331,24 @@ em { font-style: normal; color: var(--acc); }
 .browser__view .demo img, .phone__view .demo img { opacity: 1; transform: none; transition: none; }
 .browser__view .demo .demo__brand img, .phone__view .demo .demo__brand img { position: static; display: inline-block; width: auto; height: 1.6em; max-width: 8em; object-fit: contain; }
 .browser__view .demo .demo__art img, .phone__view .demo .demo__art img { inset: 16% 16% 22%; width: 68%; height: 62%; object-fit: contain; }
+
+.who { display: flex; align-items: center; gap: 16px; text-align: left; margin-bottom: 28px; padding: 10px 20px 10px 10px; border: 1px solid var(--line-2); border-radius: 999px; background: var(--card); }
+.who img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; }
+.who p { font-size: 14px; color: var(--muted); line-height: 1.4; }
+.who strong { display: block; color: var(--text); font-size: 15px; }
+.niches { margin-top: 22px; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px 10px; color: var(--muted); font-size: 15px; }
+.niches a { color: var(--text); border: 1px solid var(--line-2); border-radius: 999px; padding: 7px 14px; font-weight: 500; transition: border-color .2s, color .2s; }
+.niches a:hover { border-color: var(--acc); color: var(--acc); }
+
+/* páginas por rubro */
+.hero--niche { padding-bottom: 72px; }
+.hero--niche h1 { font-size: clamp(36px, 5vw, 68px); }
+.niche__price { margin-top: 26px; color: var(--muted); font-size: 15px; }
+.niche__price strong { color: var(--acc); font-weight: 700; }
+.cards--3 { grid-template-columns: repeat(3, 1fr); }
+.niche__inc { display: grid; grid-template-columns: 1fr 1.2fr; gap: 56px; align-items: center; }
+.ticks--big { grid-template-columns: 1fr 1fr; gap: 16px 28px; font-size: 17px; margin: 0; }
+@media (max-width: 1020px) { .cards--3 { grid-template-columns: 1fr; } .niche__inc { grid-template-columns: 1fr; gap: 28px; } }
+@media (max-width: 560px) { .ticks--big { grid-template-columns: 1fr; } }
+@media (max-width: 1020px) { .hero .niche__price { order: 7; } }
+@media (max-width: 560px) { .hero--niche h1 { font-size: 31px; } }
