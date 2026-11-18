@@ -283,3 +283,16 @@ p { margin: 0; }
 .bonus p { color: var(--muted); font-size: 15px; margin-top: 4px; }
 .bonus__tag { font: 400 12px/1 var(--mono); color: var(--acc); padding: 7px 10px; border: 1px solid rgba(200,245,96,.3); border-radius: 999px; white-space: nowrap; }
 @media (max-width: 700px) { .bonus { grid-template-columns: 1fr; gap: 14px; } .bonus__tag { justify-self: start; } }
+
+/* proceso en celular: línea vertical continua, punto en cada paso y el texto a la derecha */
+@media (max-width: 1020px) {
+  .steps { gap: 0; margin-top: 48px; position: relative; padding-left: 36px; }
+  .steps::before { content: ""; position: absolute; left: 7px; top: 8px; bottom: 8px; width: 1px; background: linear-gradient(var(--line-2), var(--line-2) 85%, transparent); }
+  .steps li { border-top: 0; padding: 0 0 36px; }
+  .steps li:last-child { padding-bottom: 0; }
+  .steps li::before { top: 4px; left: -34px; width: 11px; height: 11px; background: var(--bg); border: 1.5px solid var(--text); }
+  .steps li:first-child::before { background: var(--acc); border-color: var(--acc); box-shadow: 0 0 12px rgba(200,245,96,.5); }
+  .steps span { display: inline-block; margin-right: 8px; }
+  .steps h3 { display: inline; margin: 0; font-size: 18px; }
+  .steps p { margin-top: 8px; }
+}

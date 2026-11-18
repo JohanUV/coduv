@@ -78,13 +78,50 @@ def punto(q, r=3.2, fill=ACC):
     return f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{r}" fill="{fill}"/>'
 
 
+def anim_d(frames, dur, stroke=L, fill="none", w=1.3, begin="0s"):
+    """Un trazo cuya forma cambia entre fotogramas (mismo número de puntos)."""
+    vals = ";".join(frames + [frames[0]])
+    return (f'<path d="{frames[0]}" fill="{fill}" stroke="{stroke}" stroke-width="{w}" stroke-linejoin="round">'
+            f'<animate attributeName="d" values="{vals}" dur="{dur}" begin="{begin}" repeatCount="indefinite" calcMode="spline" '
+            f'keySplines="{";".join(["0.45 0 0.55 1"] * len(frames))}" keyTimes="{";".join(f"{i / len(frames):.4f}" for i in range(len(frames)))};1"/></path>')
+
+
+def viaje(p, q, dur, begin, r=3.4, fill=ACC):
+    """Un punto que viaja de p a q y desaparece al llegar."""
+    (x1, y1), (x2, y2) = pr(*p), pr(*q)
+    return (f'<circle r="{r}" fill="{fill}" opacity="0">'
+            f'<animate attributeName="cx" values="{x1:.1f};{x2:.1f}" dur="{dur}" begin="{begin}" repeatCount="indefinite"/>'
+            f'<animate attributeName="cy" values="{y1:.1f};{y2:.1f}" dur="{dur}" begin="{begin}" repeatCount="indefinite"/>'
+            f'<animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.15;0.8;1" dur="{dur}" begin="{begin}" repeatCount="indefinite"/></circle>')
+
+
+ESTILO = """<style>
+.flota{animation:flota 3.2s ease-in-out infinite}
+.click{transform-box:fill-box;transform-origin:0 0;animation:click 3.2s ease-in-out infinite}
+.brilla{animation:brilla 3.2s ease-in-out infinite}
+.tipea circle{animation:tipea 1.4s ease-in-out infinite}
+.tipea circle:nth-child(2){animation-delay:.2s}.tipea circle:nth-child(3){animation-delay:.4s}
+.corre{stroke-dasharray:3 5;animation:corre 1.2s linear infinite}
+.aparece{animation:aparece 3.6s ease-in-out infinite}
+.late{animation:late 2.4s ease-in-out infinite}
+@keyframes flota{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes click{0%,30%,100%{transform:translate(0,0) scale(1)}38%{transform:translate(1px,1px) scale(.86)}46%{transform:translate(0,0) scale(1)}}
+@keyframes brilla{0%,30%{fill-opacity:.12}40%{fill-opacity:.55}70%,100%{fill-opacity:.12}}
+@keyframes tipea{0%,60%,100%{opacity:.25}30%{opacity:1}}
+@keyframes corre{to{stroke-dashoffset:-16}}
+@keyframes aparece{0%,15%{opacity:0;transform:translateY(-10px)}30%,85%{opacity:1;transform:translateY(0)}100%{opacity:0}}
+@keyframes late{0%,100%{opacity:.5}50%{opacity:1}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>"""
+
+
 def svg(elementos, nombre):
     texto = "".join(elementos)
     nums = [float(v) for v in re.findall(r"-?\d+\.\d", texto)]
     xs, ys = nums[0::2], nums[1::2]
     x0, x1, y0, y1 = min(xs) - 14, max(xs) + 14, min(ys) - 14, max(ys) + 14
     out = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{x0:.0f} {y0:.0f} {x1 - x0:.0f} {y1 - y0:.0f}" '
-           f'fill="none" aria-hidden="true">{texto}</svg>\n')
+           f'fill="none" aria-hidden="true">{ESTILO}{texto}</svg>\n')
     Path("img/v3").mkdir(parents=True, exist_ok=True)
     Path(f"img/v3/{nombre}.svg").write_text(out)
 
@@ -106,18 +143,20 @@ web.append(poli([(22, lp, 108), (110, lp, 108)], stroke=L, cerrar=False))
 web.append(poli([(22, lp, 98), (95, lp, 98)], stroke=L, cerrar=False))
 web.append(rect_en_cara_l(lp, 150, 98, 258, 172, fill="#121317"))          # imagen
 web.append(poli([(150, lp, 98), (190, lp, 140), (215, lp, 118), (258, lp, 160)], stroke=L, cerrar=False))
-web.append(rect_en_cara_l(lp, 22, 58, 100, 80, fill="rgba(200,245,96,.14)", stroke=ACC))   # botón
+web.append(rect_en_cara_l(lp, 22, 58, 100, 80, fill="rgb(200,245,96)", stroke=ACC).replace("<path ", '<path class="brilla" fill-opacity=".12" ', 1))   # botón
 for k in range(3):
     web.append(rect_en_cara_l(lp, 22 + k * 82, 30, 92 + k * 82, 48, stroke=L))
 # cursor sobre el botón
 cx_, cy_ = pr(88, lp, 66)
-web.append(f'<path d="M {cx_:.1f} {cy_:.1f} l 0 16 l 4.5 -4 l 3.5 7 l 3 -1.5 l -3.5 -7 l 6 -0.5 Z" fill="#f7f8f8" stroke="#08090a" stroke-width="1"/>')
+web.append(f'<path class="click" d="M {cx_:.1f} {cy_:.1f} l 0 16 l 4.5 -4 l 3.5 7 l 3 -1.5 l -3.5 -7 l 6 -0.5 Z" fill="#f7f8f8" stroke="#08090a" stroke-width="1"/>')
 # el mensaje que sale: una burbuja de pie, delante y a la derecha
+web.append('<g class="flota">')
 web += caja(250, 60, 120, 120, 6, 62, stroke=ACC)
 bx = [pr(262 + i * 16, 66.5, 151) for i in range(3)]
-web += [f'<circle cx="{x:.1f}" cy="{y:.1f}" r="3.4" fill="{ACC}"/>' for x, y in bx]
+web.append('<g class="tipea">' + "".join(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="3.4" fill="{ACC}"/>' for x, y in bx) + '</g>')
 web.append(poli([(262, 66, 120), (252, 66, 104), (284, 66, 120)], fill=CARAS[1], stroke=ACC))
-web.append(flecha((200, 0.5, 110), (248, 60, 140), stroke=ACC, dash="3 4"))
+web.append('</g>')
+web.append(flecha((200, 0.5, 110), (248, 60, 140), stroke=ACC).replace("<line ", '<line class="corre" ', 1))
 svg(web, "fig-web")
 
 # ───────────── FIG 0.2 · Automatización
@@ -132,32 +171,36 @@ for i in range(2):
     a0 = nodos[i][0] + T + 6
     a1 = nodos[i + 1][0] - 6
     auto.append(flecha((a0, T / 2, 12), (a1, T / 2, 12), stroke=L2))
-    for k in (0.3, 0.62):
-        auto.append(punto((a0 + (a1 - a0) * k, T / 2, 12)))
+    for k in range(3):
+        auto.append(viaje((a0, T / 2, 12), (a1 - 8, T / 2, 12), "1.8s", f"{i * 0.9 + k * 0.6:.1f}s"))
 # 1. el chat (burbuja de pie con su cola)
 a, l = nodos[0]
 auto += caja(a + 20, l + 50, 12, 70, 6, 50)
 auto.append(poli([(a + 32, l + 56, 12), (a + 24, l + 56, -2), (a + 50, l + 56, 12)], fill=CARAS[1]))
-for i in range(3):
-    x, y = pr(a + 38 + i * 17, l + 56.5, 37)
-    auto.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="3" fill="rgba(255,255,255,.7)"/>')
+auto.append('<g class="tipea">' + "".join(
+    '<circle cx="%.1f" cy="%.1f" r="3" fill="rgba(255,255,255,.8)"/>' % pr(a + 38 + i * 17, l + 56.5, 37) for i in range(3)) + '</g>')
 # 2. el engranaje (un disco con dientes, acostado sobre la placa)
 a, l = nodos[1]
 c = (a + T / 2, l + T / 2, 24)
-dientes = []
-for i in range(48):
-    t = 2 * math.pi * i / 48
-    r = 40 if (i // 3) % 2 == 0 else 31
-    dientes.append((c[0] + r * math.cos(t), c[1] + r * math.sin(t), c[2]))
-canto = [(p[0], p[1], 12) for p in dientes]
-auto.append(poli(canto, fill=CARAS[2], stroke=L))
-auto.append(poli(dientes, fill=CARAS[0], stroke=L2))
+def engranaje(giro, z):
+    pts = []
+    for i in range(48):
+        t = 2 * math.pi * i / 48 + giro
+        r = 40 if (i // 3) % 2 == 0 else 31
+        pts.append((c[0] + r * math.cos(t), c[1] + r * math.sin(t), z))
+    return d_of(pts)
+paso = 2 * math.pi / 8  # un diente
+cuadros = [k * paso / 6 for k in range(6)]
+auto.append(anim_d([engranaje(g, 12) for g in cuadros], "1.6s", stroke=L, fill=CARAS[2]))
+auto.append(anim_d([engranaje(g, 24) for g in cuadros], "1.6s", stroke=L2, fill=CARAS[0]))
 auto.append(poli(circulo(c, 12), fill="#08090a", stroke=L2))
 # 3. la hoja de pedidos (filas apiladas, la última en acento)
 a, l = nodos[2]
-for k in range(4):
-    color = ACC if k == 3 else L
-    auto += caja(a + 18, l + 18, 12 + k * 14, 74, 74, 9, stroke=color)
+for k in range(3):
+    auto += caja(a + 18, l + 18, 12 + k * 14, 74, 74, 9, stroke=L)
+auto.append('<g class="aparece">')
+auto += caja(a + 18, l + 18, 12 + 3 * 14, 74, 74, 9, stroke=ACC)
+auto.append('</g>')
 svg(auto, "fig-auto")
 
 # ───────────── FIG 0.3 · Sistemas y datos
@@ -167,13 +210,18 @@ sis += caja(-30, -40, 0, 420, 150, 10)                 # base
 sis += caja(0, -20, 10, 230, 8, 170)                    # panel
 lp = -11.5
 sis.append(rect_en_cara_l(lp, 10, 20, 220, 170, fill="#0c0d0f"))
-for k, h in enumerate((30, 52, 40, 76, 64, 98)):
+ALTOS = [(30, 52, 40, 76, 64, 98), (44, 36, 62, 58, 86, 90), (36, 60, 50, 70, 78, 104)]
+def barra(k, h):
+    return d_of([(22 + k * 24, lp, 74), (38 + k * 24, lp, 74), (38 + k * 24, lp, 74 + h), (22 + k * 24, lp, 74 + h)])
+for k in range(6):
     col = ACC if k == 5 else L2
-    sis.append(rect_en_cara_l(lp, 22 + k * 24, 74, 38 + k * 24, 74 + h, fill="#101114", stroke=col))
+    sis.append(anim_d([barra(k, alt[k]) for alt in ALTOS], "4.5s", stroke=col, fill="#101114", begin=f"{k * 0.12:.2f}s"))
 for k in range(3):
     sis.append(poli([(22, lp, 58 - k * 14), (200, lp, 58 - k * 14)], stroke=L, cerrar=False))
 for k in range(3):
     sis += cilindro(320, 40, 10 + k * 34, 48, 26)
-sis.append(flecha((272, 40, 60), (232, -12, 110), stroke=L2, dash="3 4"))
+sis.append(flecha((272, 40, 60), (232, -12, 110), stroke=L2).replace("<line ", '<line class="corre" ', 1))
+for k in range(2):
+    sis.append(viaje((272, 40, 60), (236, -8, 104), "1.6s", f"{k * 0.8:.1f}s"))
 svg(sis, "fig-sis")
 print("ok")
