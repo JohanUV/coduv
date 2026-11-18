@@ -70,7 +70,6 @@ p { margin: 0; }
 .lead { margin-top: 24px; font-size: clamp(17px, 1.6vw, 20px); color: var(--muted); max-width: 46ch; line-height: 1.55; }
 
 .hero__shot { margin-top: 72px; position: relative; }
-.hero__shot::after { content: ""; position: absolute; left: -24px; right: -24px; bottom: 120px; height: 240px; background: linear-gradient(transparent, var(--bg)); pointer-events: none; z-index: 2; }
 .stage { position: relative; perspective: 2200px; }
 .stage__desk { box-shadow: 0 40px 120px -30px rgba(0, 0, 0, .9), 0 0 0 1px var(--line); }
 .stage__mob { position: absolute; right: 3%; bottom: -40px; width: 19%; z-index: 3; }
@@ -263,7 +262,6 @@ p { margin: 0; }
   .hero__shot { margin-top: 56px; }
   .stage__desk { transform: none; }
   .stage__mob { width: 30%; bottom: -24px; right: -2%; }
-  .hero__shot::after { display: none; }
   .try { padding: 20px; }
   .sec { padding: 96px 0; }
   .cases { grid-template-columns: 1fr; gap: 48px; }
@@ -276,3 +274,12 @@ p { margin: 0; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+
+/* regalo: video animado */
+.bonus { display: grid; grid-template-columns: auto 1fr auto; gap: 24px; align-items: center; margin-top: 20px; padding: 24px 28px; border: 1px solid rgba(200,245,96,.28); border-radius: 14px; background: linear-gradient(90deg, rgba(200,245,96,.07), transparent 60%), var(--bg-1); }
+.bonus__ico { width: 48px; height: 48px; border-radius: 12px; display: grid; place-items: center; background: rgba(200,245,96,.12); color: var(--acc); }
+.bonus__ico svg { width: 24px; height: 24px; }
+.bonus h3 { font-size: 18px; font-weight: 590; }
+.bonus p { color: var(--muted); font-size: 15px; margin-top: 4px; }
+.bonus__tag { font: 400 12px/1 var(--mono); color: var(--acc); padding: 7px 10px; border: 1px solid rgba(200,245,96,.3); border-radius: 999px; white-space: nowrap; }
+@media (max-width: 700px) { .bonus { grid-template-columns: 1fr; gap: 14px; } .bonus__tag { justify-self: start; } }
