@@ -19,9 +19,9 @@
 <link rel="apple-touch-icon" href="img/brand/mark-160.png">
 <link rel="preload" as="font" href="fonts/inter-var-latin.woff2" type="font/woff2" crossorigin>
 <link rel="preload" as="image" href="img/v2/cottullari.webp" type="image/webp" fetchpriority="high">
-<link rel="stylesheet" href="css/fonts.css?v=5">
-<link rel="stylesheet" href="css/fonts-inter.css?v=5">
-<link rel="stylesheet" href="css/v3.css?v=5">
+<link rel="stylesheet" href="css/fonts.css?v=6">
+<link rel="stylesheet" href="css/fonts-inter.css?v=6">
+<link rel="stylesheet" href="css/v3.css?v=6">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -73,14 +73,39 @@
 
 <!-- HERO -->
 <section class="hero" id="top">
-  <div class="wrap">
+  <div class="wrap hero__grid">
+    <div class="hero__copy">
     <a class="hero__pill" href="#trabajos"><span class="dot"></span>5 negocios en producción<span class="hero__pill-sep"></span>Ver trabajos</a>
     <h1>El software que tu negocio necesita para vender más.</h1>
     <p class="lead">Páginas web, sistemas a medida y automatizaciones para negocios que atienden por WhatsApp. Código propio, precio cerrado y entrega en semanas.</p>
     <div class="cta-row">
       <a class="btn btn--light js-wa" href="#contacto" data-msg="Hola coduv.dev, quiero cotizar una web para mi negocio.">Cotizar por WhatsApp</a>
-      <a class="btn btn--ghost" href="#probar">Mira tu negocio con web <span aria-hidden="true">›</span></a>
+      <a class="btn btn--ghost" href="#trabajos">Ver trabajos <span aria-hidden="true">›</span></a>
     </div>
+    </div>
+    <form class="try" id="try" autocomplete="off">
+      <p class="try__k">Pruébalo ahora</p>
+      <label class="try__label" for="try-name">Mira cómo se vería tu negocio</label>
+      <p class="try__sub">Escribe el nombre y elige el rubro: tu web aparece abajo al instante.</p>
+      <div class="try__row">
+        <input id="try-name" name="nombre" type="text" maxlength="28" placeholder="Nombre de tu negocio">
+        <select id="try-kind" name="rubro" aria-label="Tipo de negocio">
+          <option value="restaurante">Restaurante</option>
+          <option value="tienda">Tienda</option>
+          <option value="belleza">Belleza</option>
+          <option value="taller">Taller</option>
+          <option value="salud">Salud</option>
+          <option value="gimnasio">Gimnasio</option>
+          <option value="transporte">Transporte</option>
+          <option value="otro">Otro</option>
+        </select>
+      </div>
+      <div class="try__extra">
+        <label class="try__logo"><input type="file" id="try-logo" accept="image/*"><span>Subir mi logo (opcional)</span></label>
+        <a class="try__go js-try-wa" href="#contacto" hidden>Quiero esta web para <b data-try-name></b> ›</a>
+      </div>
+      <dl class="try__stats"><div><dt>5</dt><dd>negocios en producción</dd></div><div><dt>1–2 sem</dt><dd>por landing</dd></div><div><dt>&lt;24 h</dt><dd>para responderte</dd></div></dl>
+    </form>
   </div>
 
   <div class="wrap hero__shot" id="probar">
@@ -108,26 +133,6 @@
       </div>
     </div>
 
-    <form class="try" id="try" autocomplete="off">
-      <label class="try__label" for="try-name">Mira cómo se vería tu negocio</label>
-      <div class="try__row">
-        <input id="try-name" name="nombre" type="text" maxlength="28" placeholder="Nombre de tu negocio">
-        <select id="try-kind" name="rubro" aria-label="Tipo de negocio">
-          <option value="restaurante">Restaurante</option>
-          <option value="tienda">Tienda</option>
-          <option value="belleza">Belleza</option>
-          <option value="taller">Taller</option>
-          <option value="salud">Salud</option>
-          <option value="gimnasio">Gimnasio</option>
-          <option value="transporte">Transporte</option>
-          <option value="otro">Otro</option>
-        </select>
-      </div>
-      <div class="try__extra">
-        <label class="try__logo"><input type="file" id="try-logo" accept="image/*"><span>Subir mi logo (opcional)</span></label>
-        <a class="try__go js-try-wa" href="#contacto" hidden>Quiero esta web para <b data-try-name></b> ›</a>
-      </div>
-    </form>
   </div>
 
   <div class="wrap clients">
@@ -338,6 +343,6 @@
 
 <div class="bar"><a class="btn btn--light js-wa" href="#contacto">Cotizar por WhatsApp</a></div>
 
-<script src="js/v2.js?v=5" defer></script>
+<script src="js/v2.js?v=6" defer></script>
 </body>
 </html>
