@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html lang="es" class="no-js">
-<script>document.documentElement.className="js"</script>
 <head>
+<script>document.documentElement.className="js"</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>coduv.dev · Estudio de desarrollo web en Ecuador</title>
-<meta name="description" content="coduv.dev diseña y programa sitios web, sistemas a medida y automatizaciones para negocios de Ecuador y de cualquier país. Código propio, precio cerrado y entrega en semanas.">
-<meta name="theme-color" content="#09090b">
-<meta property="og:title" content="coduv.dev · Webs que convierten visitas en clientes">
-<meta property="og:description" content="Sitios web, sistemas a medida y automatización para negocios que atienden por WhatsApp. Cinco negocios ya reciben clientes con sitios hechos por coduv.dev.">
+<title>coduv.dev · Software y páginas web para negocios en Ecuador</title>
+<meta name="description" content="coduv.dev diseña y programa páginas web, sistemas a medida, automatizaciones e inteligencia artificial para negocios de Ecuador y de cualquier país. Código propio, precio cerrado y entrega en semanas.">
+<meta name="theme-color" content="#08090a">
+<meta property="og:title" content="coduv.dev · Software y páginas web para negocios">
+<meta property="og:description" content="Páginas web, sistemas a medida y automatización para negocios que atienden por WhatsApp. Cinco negocios ya reciben clientes con sitios hechos por coduv.dev.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://coduv.vercel.app/img/v2/og.jpg">
 <meta property="og:locale" content="es_EC">
 <meta property="og:url" content="https://coduv.vercel.app/">
 <link rel="canonical" href="https://coduv.vercel.app/">
 <link rel="icon" href="img/v2/favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="img/brand/mark-160.png">
-<link rel="preload" as="font" href="fonts/archivo-100-900-normal-latin.woff2" type="font/woff2" crossorigin>
-<link rel="preload" as="image" href="img/v2/cottullari.webp" type="image/webp" fetchpriority="high">
 <link rel="icon" href="favicon.ico" sizes="32x32">
-<link rel="stylesheet" href="css/fonts.css?v=4">
-<link rel="stylesheet" href="css/v2.css?v=4">
+<link rel="apple-touch-icon" href="img/brand/mark-160.png">
+<link rel="preload" as="font" href="fonts/inter-var-latin.woff2" type="font/woff2" crossorigin>
+<link rel="preload" as="image" href="img/v2/cottullari.webp" type="image/webp" fetchpriority="high">
+<link rel="stylesheet" href="css/fonts.css?v=5">
+<link rel="stylesheet" href="css/fonts-inter.css?v=5">
+<link rel="stylesheet" href="css/v3.css?v=5">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -29,10 +30,11 @@
   "alternateName": "CODUV",
   "url": "https://coduv.vercel.app/",
   "image": "https://coduv.vercel.app/img/v2/og.jpg",
-  "description": "Estudio de desarrollo web: sitios web, sistemas a medida y automatización.",
+  "description": "Estudio de desarrollo de software: páginas web, sistemas a medida, automatización e inteligencia artificial.",
   "telephone": "+593963607760",
   "email": "jaren22uv@gmail.com",
   "areaServed": "Worldwide",
+  "priceRange": "$100 - $500",
   "address": { "@type": "PostalAddress", "addressLocality": "Latacunga", "addressCountry": "EC" },
   "founder": { "@type": "Person", "name": "Johan Untuña" },
   "sameAs": ["https://www.facebook.com/profile.php?id=61594049955441", "https://www.instagram.com/coduv.ec/", "https://github.com/JohanUV"]
@@ -45,21 +47,25 @@
 <header class="nav" id="nav">
   <div class="wrap nav__in">
     <a class="brand" href="#top" aria-label="coduv.dev, inicio">
-      <img src="img/v2/favicon.svg" alt="" width="28" height="28">
-      <span class="brand__name">coduv<b>.dev</b></span>
+      <img src="img/v2/favicon.svg" alt="" width="22" height="22">
+      <span>coduv.dev</span>
     </a>
     <nav class="nav__links" aria-label="Principal">
-      <a href="#trabajos">Trabajos</a>
       <a href="#servicios">Servicios</a>
+      <a href="#trabajos">Trabajos</a>
+      <a href="#precios">Precios</a>
       <a href="#proceso">Proceso</a>
       <a href="#preguntas">Preguntas</a>
     </nav>
-    <a class="btn btn--sm btn--acc js-wa" href="#contacto" data-msg="Hola coduv.dev, quiero cotizar una web para mi negocio.">Cotizar</a>
+    <div class="nav__end">
+      <a class="nav__link-wa js-wa" href="#contacto">WhatsApp</a>
+      <a class="btn btn--light btn--sm js-wa" href="#contacto" data-msg="Hola coduv.dev, quiero cotizar una web para mi negocio.">Cotizar</a>
+    </div>
     <button class="nav__burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><span></span><span></span></button>
   </div>
   <div class="menu" id="menu" hidden>
-    <a href="#trabajos">Trabajos</a><a href="#servicios">Servicios</a><a href="#proceso">Proceso</a><a href="#preguntas">Preguntas</a>
-    <a class="btn btn--acc js-wa" href="#contacto">Cotizar por WhatsApp</a>
+    <a href="#servicios">Servicios</a><a href="#trabajos">Trabajos</a><a href="#precios">Precios</a><a href="#proceso">Proceso</a><a href="#preguntas">Preguntas</a>
+    <a class="btn btn--light js-wa" href="#contacto">Cotizar por WhatsApp</a>
   </div>
 </header>
 
@@ -67,39 +73,17 @@
 
 <!-- HERO -->
 <section class="hero" id="top">
-  <div class="hero__glow" aria-hidden="true"></div>
-  <div class="wrap hero__in">
-    <div class="hero__copy">
-      <p class="eyebrow"><span class="dot"></span>Estudio de desarrollo web en Ecuador</p>
-      <h1>Webs que convierten visitas en <em>clientes</em>.</h1>
-      <p class="lead">Diseñamos y programamos sitios web, sistemas y automatizaciones para negocios que atienden por WhatsApp. Código propio, precio cerrado y tu web lista en semanas.</p>
-      <div class="cta-row">
-        <a class="btn btn--acc js-wa" href="#contacto" data-msg="Hola coduv.dev, quiero cotizar una web para mi negocio.">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.4.6-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg>
-          Cotizar mi web por WhatsApp
-        </a>
-        <a class="btn btn--ghost" href="#trabajos">Ver trabajos</a>
-      </div>
-      <form class="try" id="try" autocomplete="off">
-        <label class="try__label" for="try-name">Mira cómo se vería tu negocio</label>
-        <div class="try__row">
-          <input id="try-name" name="nombre" type="text" maxlength="28" placeholder="Nombre de tu negocio">
-          <select id="try-kind" name="rubro" aria-label="Tipo de negocio">
-            <option value="restaurante">Restaurante</option>
-            <option value="tienda">Tienda</option>
-            <option value="belleza">Belleza</option>
-            <option value="taller">Taller</option>
-            <option value="salud">Salud</option>
-            <option value="gimnasio">Gimnasio</option>
-            <option value="transporte">Transporte</option>
-            <option value="otro">Otro</option>
-          </select>
-        </div>
-        <label class="try__logo"><input type="file" id="try-logo" accept="image/*"><span>Subir mi logo (opcional)</span></label>
-        <a class="try__go js-try-wa" href="#contacto" hidden>Quiero esta web para <b data-try-name></b></a>
-      </form>
+  <div class="wrap">
+    <a class="hero__pill" href="#trabajos"><span class="dot"></span>5 negocios en producción<span class="hero__pill-sep"></span>Ver trabajos</a>
+    <h1>El software que tu negocio necesita para vender más.</h1>
+    <p class="lead">Páginas web, sistemas a medida y automatizaciones para negocios que atienden por WhatsApp. Código propio, precio cerrado y entrega en semanas.</p>
+    <div class="cta-row">
+      <a class="btn btn--light js-wa" href="#contacto" data-msg="Hola coduv.dev, quiero cotizar una web para mi negocio.">Cotizar por WhatsApp</a>
+      <a class="btn btn--ghost" href="#probar">Mira tu negocio con web <span aria-hidden="true">›</span></a>
     </div>
+  </div>
 
+  <div class="wrap hero__shot" id="probar">
     <div class="stage" aria-label="Sitios hechos por coduv.dev" data-carousel>
       <div class="browser stage__desk">
         <div class="browser__bar"><i></i><i></i><i></i><span class="browser__url" data-url>cottullari.com</span></div>
@@ -122,172 +106,184 @@
           <img data-src="img/v2/mashka-mob.webp" alt="" width="640" height="1385">
         </div>
       </div>
-      <div class="stage__chip"><span class="dot dot--live"></span>En producción</div>
     </div>
+
+    <form class="try" id="try" autocomplete="off">
+      <label class="try__label" for="try-name">Mira cómo se vería tu negocio</label>
+      <div class="try__row">
+        <input id="try-name" name="nombre" type="text" maxlength="28" placeholder="Nombre de tu negocio">
+        <select id="try-kind" name="rubro" aria-label="Tipo de negocio">
+          <option value="restaurante">Restaurante</option>
+          <option value="tienda">Tienda</option>
+          <option value="belleza">Belleza</option>
+          <option value="taller">Taller</option>
+          <option value="salud">Salud</option>
+          <option value="gimnasio">Gimnasio</option>
+          <option value="transporte">Transporte</option>
+          <option value="otro">Otro</option>
+        </select>
+      </div>
+      <div class="try__extra">
+        <label class="try__logo"><input type="file" id="try-logo" accept="image/*"><span>Subir mi logo (opcional)</span></label>
+        <a class="try__go js-try-wa" href="#contacto" hidden>Quiero esta web para <b data-try-name></b> ›</a>
+      </div>
+    </form>
   </div>
 
-  <div class="marquee" aria-label="Clientes">
-    <div class="marquee__track">
-      <span>Cottullari</span><span>JULIUSPITKENNEL</span><span>Noxis</span><span>ModuForm</span><span>Mashka Box</span>
-      <span aria-hidden="true">Cottullari</span><span aria-hidden="true">JULIUSPITKENNEL</span><span aria-hidden="true">Noxis</span><span aria-hidden="true">ModuForm</span><span aria-hidden="true">Mashka Box</span>
+  <div class="wrap clients">
+    <p>Negocios que ya reciben clientes con su web</p>
+    <ul>
+      <li>Cottullari</li><li>JULIUSPITKENNEL</li><li>Noxis</li><li>ModuForm</li><li>Mashka Box</li>
+    </ul>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section class="sec" id="servicios">
+  <div class="wrap">
+    <h2 class="sec__title">Hecho para negocios que quieren crecer. <span>Una web que vende, procesos que corren solos y datos en orden.</span></h2>
+
+    <div class="figs">
+      <article>
+        <p class="fig__n">FIG 0.1</p>
+        <img src="img/v3/fig-web.svg" alt="" width="320" height="260" loading="lazy">
+        <h3>Páginas web que venden</h3>
+        <p>Landings, catálogos y webs de negocio que llevan cada visita a un mensaje de WhatsApp.</p>
+      </article>
+      <article>
+        <p class="fig__n">FIG 0.2</p>
+        <img src="img/v3/fig-auto.svg" alt="" width="320" height="260" loading="lazy">
+        <h3>Automatización</h3>
+        <p>Respuestas, pedidos, recordatorios y reportes que se hacen solos con n8n, WhatsApp e IA.</p>
+      </article>
+      <article>
+        <p class="fig__n">FIG 0.3</p>
+        <img src="img/v3/fig-sis.svg" alt="" width="320" height="260" loading="lazy">
+        <h3>Sistemas y datos</h3>
+        <p>Del Excel a un sistema propio: inventario, clientes, cotizaciones, usuarios y reportes.</p>
+      </article>
     </div>
+
+    <ul class="also">
+      <li><strong>Inteligencia artificial</strong>Asistentes que responden y clasifican, también con modelos que corren en tu computadora.</li>
+      <li><strong>Integración de datos</strong>Conectamos tu sistema con portales, proveedores y APIs que no se hablan entre sí.</li>
+      <li><strong>Mantenimiento</strong>Dominio, hosting, respaldos y cambios después de entregar.</li>
+    </ul>
   </div>
 </section>
 
 <!-- TRABAJOS -->
 <section class="sec" id="trabajos">
   <div class="wrap">
-    <div class="sec__head">
-      <p class="eyebrow">Trabajos</p>
-      <h2>Negocios reales, <em>sitios en vivo</em>.</h2>
-      <p class="sec__sub">Cada web se recorre sola al pasar el cursor. Todas están publicadas: entra y compruébalo.</p>
-      <p class="niches">Mira lo que hacemos para tu rubro: <a href="gimnasios">Gimnasios</a><a href="academias">Academias</a><a href="muebles">Muebles a medida</a><a href="transporte">Transporte</a></p>
+    <div class="sec__row">
+      <h2 class="sec__title">Trabajos en producción. <span>Negocios reales de Ecuador que hoy reciben clientes por su web.</span></h2>
+      <p class="niches">Por rubro: <a href="transporte">Transporte</a><a href="muebles">Muebles</a><a href="academias">Academias</a><a href="gimnasios">Gimnasios</a></p>
     </div>
 
-    <div class="works">
-      <article class="work work--wide reveal">
-        <a class="work__shot" href="https://cottullari.com/" target="_blank" rel="noopener" aria-label="Abrir cottullari.com">
-          <div class="browser"><div class="browser__bar"><i></i><i></i><i></i><span class="browser__url">cottullari.com</span></div>
-          <div class="browser__view scroll"><img src="img/v2/cottullari-full.webp" alt="Página completa de Cottullari" loading="lazy" width="900"></div></div>
-        </a>
-        <div class="work__meta">
-          <p class="tag">Transporte turístico · Latacunga</p>
-          <h3>Cottullari</h3>
-          <p>Web en dominio propio para una empresa con flota de 22 unidades: rutas por Costa, Sierra, Amazonía, Colombia y Perú, y un cotizador que escribe directo a su base de datos.</p>
-          <ul class="stack"><li>React</li><li>PHP</li><li>MySQL</li><li>Dominio propio</li></ul>
-          <a class="link" href="https://cottullari.com/" target="_blank" rel="noopener">cottullari.com</a>
-        </div>
-      </article>
+    <article class="case case--wide">
+      <a class="work__shot" href="https://cottullari.com/" target="_blank" rel="noopener" aria-label="Abrir cottullari.com">
+        <div class="browser"><div class="browser__bar"><i></i><i></i><i></i><span class="browser__url">cottullari.com</span></div>
+        <div class="browser__view scroll"><img src="img/v2/cottullari-full.webp" alt="Página completa de Cottullari" loading="lazy" width="900"></div></div>
+      </a>
+      <div class="case__meta">
+        <p class="case__tag">Transporte turístico, Latacunga</p>
+        <h3>Cottullari</h3>
+        <p>Web en dominio propio para una empresa con flota de 22 unidades: rutas por Costa, Sierra, Amazonía, Colombia y Perú, y un cotizador que escribe directo a su base de datos.</p>
+        <dl class="case__facts"><div><dt>Flota</dt><dd>22 unidades</dd></div><div><dt>Stack</dt><dd>React, PHP, MySQL</dd></div></dl>
+        <a class="link" href="https://cottullari.com/" target="_blank" rel="noopener">Abrir cottullari.com ›</a>
+      </div>
+    </article>
 
-      <article class="work reveal">
+    <div class="cases">
+      <article class="case">
         <a class="work__shot" href="https://juliuspitkennel.vercel.app/" target="_blank" rel="noopener" aria-label="Abrir juliuspitkennel.vercel.app">
           <div class="browser"><div class="browser__bar"><i></i><i></i><i></i><span class="browser__url">juliuspitkennel.vercel.app</span></div>
           <div class="browser__view scroll"><img src="img/v2/juliuspitkennel-full.webp" alt="Página completa de JULIUSPITKENNEL" loading="lazy" width="900"></div></div>
         </a>
-        <div class="work__meta">
-          <p class="tag">Criadero · Ecuador</p>
-          <h3>JULIUSPITKENNEL</h3>
-          <p>Página en español, inglés y portugués para un criadero con campeón Mejor de la Raza. Consultas a WhatsApp en el idioma del visitante.</p>
-          <ul class="stack"><li>3 idiomas</li><li>WhatsApp</li></ul>
-        </div>
+        <p class="case__tag">Criadero, Ecuador</p>
+        <h3>JULIUSPITKENNEL</h3>
+        <p>En español, inglés y portugués, con consultas a WhatsApp en el idioma del visitante.</p>
       </article>
-
-      <article class="work reveal">
+      <article class="case">
         <a class="work__shot" href="https://noxisec.netlify.app/" target="_blank" rel="noopener" aria-label="Abrir noxisec.netlify.app">
           <div class="browser"><div class="browser__bar"><i></i><i></i><i></i><span class="browser__url">noxisec.netlify.app</span></div>
           <div class="browser__view scroll"><img src="img/v2/noxis-full.webp" alt="Página completa de Noxis" loading="lazy" width="900"></div></div>
         </a>
-        <div class="work__meta">
-          <p class="tag">Formación académica · Latacunga</p>
-          <h3>Noxis</h3>
-          <p>Centro de clases y preparación de ingreso, con un simulacro de examen interactivo en la portada y agenda de diagnóstico por WhatsApp.</p>
-          <ul class="stack"><li>Simulador</li><li>Planes</li></ul>
-        </div>
+        <p class="case__tag">Formación académica, Latacunga</p>
+        <h3>Noxis</h3>
+        <p>Simulacro de examen interactivo en la portada y agenda de diagnóstico por WhatsApp.</p>
       </article>
-
-      <article class="work reveal">
+      <article class="case">
         <a class="work__shot" href="https://moduform.vercel.app/" target="_blank" rel="noopener" aria-label="Abrir moduform.vercel.app">
           <div class="browser"><div class="browser__bar"><i></i><i></i><i></i><span class="browser__url">moduform.vercel.app</span></div>
           <div class="browser__view scroll"><img src="img/v2/moduform-full.webp" alt="Página completa de ModuForm" loading="lazy" width="900"></div></div>
         </a>
-        <div class="work__meta">
-          <p class="tag">Muebles a medida · Latacunga</p>
-          <h3>ModuForm</h3>
-          <p>Catálogo por categoría y cotizador de tres pasos que califica cada pedido antes de pasarlo al WhatsApp del dueño.</p>
-          <ul class="stack"><li>Catálogo</li><li>Cotizador</li></ul>
-        </div>
+        <p class="case__tag">Muebles a medida, Latacunga</p>
+        <h3>ModuForm</h3>
+        <p>Catálogo por categoría y cotizador de tres pasos que califica cada pedido.</p>
       </article>
-
-      <article class="work reveal">
+      <article class="case">
         <a class="work__shot" href="https://johanuv.github.io/mashka-box/" target="_blank" rel="noopener" aria-label="Abrir mashka-box">
           <div class="browser"><div class="browser__bar"><i></i><i></i><i></i><span class="browser__url">mashka-box</span></div>
           <div class="browser__view scroll"><img src="img/v2/mashka-full.webp" alt="Página completa de Mashka Box" loading="lazy" width="900"></div></div>
         </a>
-        <div class="work__meta">
-          <p class="tag">Box de CrossFit · Latacunga</p>
-          <h3>Mashka Box</h3>
-          <p>Landing de una sola página con fotografía del gimnasio y un único objetivo: que la visita reserve una clase de prueba.</p>
-          <ul class="stack"><li>Landing</li><li>Conversión</li></ul>
-        </div>
+        <p class="case__tag">Box de CrossFit, Latacunga</p>
+        <h3>Mashka Box</h3>
+        <p>Landing de una sola página con un objetivo: que la visita reserve su clase de prueba.</p>
       </article>
     </div>
   </div>
 </section>
 
-<!-- SERVICIOS -->
-<section class="sec sec--alt" id="servicios">
+<!-- PRECIOS -->
+<section class="sec" id="precios">
   <div class="wrap">
-    <div class="sec__head">
-      <p class="eyebrow">Servicios</p>
-      <h2>Lo que construimos <em>para tu negocio</em>.</h2>
-      <p class="sec__sub">Se cotiza por resultado, no por horas. Te recomendamos lo que te sirve, no lo que más factura.</p>
-    </div>
-    <div class="cards">
-      <article class="card card--feat reveal">
-        <span class="card__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 8h18M8 21h8"/></svg></span>
-        <h3>Sitios web que venden</h3>
-        <p>Landing pages, catálogos y webs corporativas con un objetivo claro: que la visita termine en un mensaje de WhatsApp.</p>
-        <ul class="ticks"><li>Diseño a medida, sin plantillas</li><li>Rápida en celular</li><li>Cotizador o catálogo</li><li>Varios idiomas y SEO básico</li></ul>
-      </article>
-      <article class="card reveal">
-        <span class="card__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h7"/><circle cx="18" cy="16" r="3"/></svg></span>
-        <h3>Sistemas a medida</h3>
-        <p>Del Excel al sistema que controla tu negocio: inventario, clientes, cotizaciones, agenda, usuarios y reportes en PDF.</p>
-        <ul class="ticks"><li>Panel web con roles</li><li>Base de datos propia</li></ul>
-      </article>
-      <article class="card reveal">
-        <span class="card__ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="2.5"/><circle cx="19" cy="5" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M7.3 11l9.4-4.8M7.3 13l9.4 4.8"/></svg></span>
-        <h3>Automatización</h3>
-        <p>Flujos que trabajan solos: respuestas, registro de pedidos, recordatorios y reportes cada mañana.</p>
-        <ul class="ticks"><li>n8n · WhatsApp · Sheets</li><li>IA donde aporta</li></ul>
-      </article>
-    </div>
-    <div class="prices" id="precios">
-      <article class="price price--main">
+    <h2 class="sec__title">Precios claros. <span>Por escrito y cerrados antes de empezar.</span></h2>
+    <div class="prices">
+      <article class="price">
         <h3>Landing para WhatsApp</h3>
-        <p class="price__n"><small>desde</small> $100</p>
-        <p>Una página con lo que ofreces, tu ubicación en el mapa y el botón que abre tu WhatsApp con el mensaje listo.</p>
-        <p class="price__t">Lista en 3 a 7 días</p>
+        <p class="price__n"><small>desde</small>$100</p>
+        <p>Una página con lo que ofreces, tu ubicación y el botón que abre tu WhatsApp con el mensaje listo.</p>
+        <ul class="ticks"><li>Lista en 3 a 7 días</li><li>Rápida en celular</li><li>Botón a WhatsApp y mapa</li></ul>
+        <a class="btn btn--light btn--block js-wa" href="#contacto" data-msg="Hola coduv.dev, me interesa la landing para WhatsApp.">Quiero esta</a>
       </article>
       <article class="price">
         <h3>Web de negocio o catálogo</h3>
-        <p class="price__n"><small>desde</small> $250</p>
-        <p>Varias secciones, catálogo de productos o servicios y un cotizador que te pasa cada pedido ya ordenado.</p>
-        <p class="price__t">Lista en 1 a 2 semanas</p>
+        <p class="price__n"><small>desde</small>$250</p>
+        <p>Varias secciones, catálogo de productos o servicios y un cotizador que te pasa cada pedido ordenado.</p>
+        <ul class="ticks"><li>Lista en 1 a 2 semanas</li><li>Catálogo o cotizador</li><li>Varios idiomas y SEO básico</li></ul>
+        <a class="btn btn--ghost btn--block js-wa" href="#contacto" data-msg="Hola coduv.dev, me interesa la web de negocio o catálogo.">Quiero esta</a>
       </article>
-      <article class="price price--alt">
+      <article class="price">
         <h3>Mantenimiento</h3>
-        <p class="price__n">$10 a $20<small> al mes</small></p>
-        <p>Cambios de textos y fotos, respaldos, dominio y hosting al día. Opcional: puedes contratarlo cuando quieras.</p>
-        <p class="price__t">Automatizaciones y sistemas a medida se cotizan según el caso</p>
+        <p class="price__n">$10–20<small>al mes</small></p>
+        <p>Cambios de textos y fotos, respaldos, dominio y hosting al día. Opcional.</p>
+        <ul class="ticks"><li>Automatizaciones y sistemas a medida se cotizan según el caso</li></ul>
+        <a class="btn btn--ghost btn--block js-wa" href="#contacto" data-msg="Hola coduv.dev, quiero cotizar una automatización o sistema a medida.">Cotizar a medida</a>
       </article>
     </div>
-    <p class="also">También: integración con portales y APIs, apps de escritorio con IA local, y mantenimiento de dominio, hosting y respaldos.</p>
   </div>
 </section>
 
 <!-- PROCESO -->
 <section class="sec" id="proceso">
   <div class="wrap">
-    <div class="sec__head">
-      <p class="eyebrow">Proceso</p>
-      <h2>Sin sorpresas, <em>de principio a fin</em>.</h2>
-    </div>
+    <h2 class="sec__title">Sin sorpresas, de principio a fin. <span>Un proceso corto y visible.</span></h2>
     <ol class="steps">
-      <li class="reveal"><span class="steps__n">01</span><h3>Diagnóstico</h3><p>Nos cuentas cómo trabajas hoy. Sin costo y sin llamada de ventas.</p><span class="pill">30 min · gratis</span></li>
-      <li class="reveal"><span class="steps__n">02</span><h3>Propuesta cerrada</h3><p>Por escrito: qué se construye, en cuánto tiempo y a qué precio fijo.</p><span class="pill">en 48 h</span></li>
-      <li class="reveal"><span class="steps__n">03</span><h3>Construcción visible</h3><p>Desde la primera semana ves el avance en un enlace y ajustamos sobre la marcha.</p><span class="pill">semanas, no meses</span></li>
-      <li class="reveal"><span class="steps__n">04</span><h3>Entrega</h3><p>Publicamos tu web (en tu propio dominio .com si lo quieres) y te damos accesos y código. Seguimos a tu lado.</p><span class="pill">soporte incluido</span></li>
+      <li><span>01</span><h3>Diagnóstico</h3><p>Nos cuentas cómo trabajas hoy. 30 minutos, sin costo.</p></li>
+      <li><span>02</span><h3>Propuesta cerrada</h3><p>Qué se construye, en cuánto tiempo y a qué precio fijo. En 48 horas.</p></li>
+      <li><span>03</span><h3>Construcción visible</h3><p>Desde la primera semana ves el avance en un enlace.</p></li>
+      <li><span>04</span><h3>Entrega</h3><p>Publicamos tu web y te damos accesos y código. Soporte incluido.</p></li>
     </ol>
 
-    <div class="guar reveal">
+    <div class="guar">
       <h3>Lo que garantizamos por escrito</h3>
       <ul>
-        <li><strong>Precio cerrado.</strong> Si el alcance no cambia, el precio tampoco.</li>
-        <li><strong>Se entrega como se acordó.</strong> Revisamos hasta que coincida, sin costo extra.</li>
-        <li><strong>Todo a tu nombre.</strong> Dominio, hosting, accesos y código son tuyos. Sin permanencias.</li>
-        <li><strong>Pagas la mitad al empezar.</strong> El 50 % al iniciar y el otro 50 % cuando tu web ya está publicada.</li>
-        <li><strong>A tiempo o te devuelvo el anticipo.</strong> Si tu landing o web de negocio no está publicada en el plazo acordado, te devuelvo lo que pagaste.</li>
+        <li><strong>Precio cerrado</strong>Si el alcance no cambia, el precio tampoco.</li>
+        <li><strong>Se entrega como se acordó</strong>Revisamos hasta que coincida, sin costo extra.</li>
+        <li><strong>Todo a tu nombre</strong>Dominio, hosting, accesos y código son tuyos. Sin permanencias.</li>
+        <li><strong>Mitad al empezar</strong>50 % al iniciar y 50 % cuando tu web está publicada.</li>
+        <li><strong>A tiempo o te devuelvo el anticipo</strong>Si tu landing o web de negocio no está publicada en el plazo acordado.</li>
       </ul>
     </div>
   </div>
@@ -296,16 +292,13 @@
 <!-- PREGUNTAS -->
 <section class="sec" id="preguntas">
   <div class="wrap faq">
-    <div class="sec__head sec__head--left">
-      <p class="eyebrow">Preguntas</p>
-      <h2>Lo que todos preguntan <em>antes de empezar</em>.</h2>
-    </div>
+    <h2 class="sec__title">Preguntas frecuentes.</h2>
     <div class="faq__list">
       <details><summary>¿Cuánto cuesta una página web?</summary><p>Una landing para WhatsApp parte de $100 y una web de negocio o catálogo de $250. El precio final depende de lo que necesites, y lo recibes por escrito y cerrado antes de empezar.</p></details>
-      <details><summary>¿Cuánto pago al mes después?</summary><p>Nada obligatorio. Las webs que hacemos se publican en servicios sin costo mensual; solo pagas el dominio (.com), unos $12 a $15 al año. Si quieres que nosotros hagamos los cambios y respaldos, el mantenimiento cuesta de $10 a $20 al mes.</p></details>
+      <details><summary>¿Cuánto pago al mes después?</summary><p>Nada obligatorio. Las webs se publican en servicios sin costo mensual; solo pagas el dominio (.com), unos $12 a $15 al año. Si quieres que hagamos los cambios y respaldos, el mantenimiento cuesta de $10 a $20 al mes.</p></details>
       <details><summary>¿Hay que dar anticipo?</summary><p>Sí: el 50 % al empezar y el 50 % cuando tu web está publicada. Si no está lista en el plazo acordado, te devolvemos el anticipo.</p></details>
-      <details><summary>¿Cuánto se demora?</summary><p>Una landing o web corporativa suele estar lista en una a dos semanas. Un sistema a medida se entrega por fases, con una primera versión utilizable en pocas semanas.</p></details>
-      <details><summary>¿Necesito dominio y hosting?</summary><p>No. Te ayudamos a comprar el dominio a tu nombre y configuramos el hosting. Para webs estáticas usamos servicios sin costo mensual.</p></details>
+      <details><summary>¿Cuánto se demora?</summary><p>Una landing o web de negocio suele estar lista en una a dos semanas. Un sistema a medida se entrega por fases, con una primera versión utilizable en pocas semanas.</p></details>
+      <details><summary>¿Necesito dominio y hosting?</summary><p>No. Te ayudamos a comprar el dominio a tu nombre y configuramos el hosting.</p></details>
       <details><summary>¿Qué pasa si después quiero cambiar algo?</summary><p>Los cambios pequeños de contenido entran en el soporte. Las funciones nuevas se cotizan aparte, por escrito. Y como el código es tuyo, cualquier desarrollador podría continuarlo.</p></details>
       <details><summary>¿Trabajan con otras ciudades o países?</summary><p>Sí, todo el proceso es remoto: diagnóstico por videollamada o WhatsApp, avances en un enlace y entrega en tu dominio. En Latacunga y Cotopaxi también nos reunimos en persona.</p></details>
     </div>
@@ -314,42 +307,37 @@
 
 <!-- CONTACTO -->
 <section class="sec cta" id="contacto">
-  <div class="wrap cta__in reveal">
+  <div class="wrap">
+    <h2>Tu negocio, en internet y vendiendo.</h2>
+    <p class="lead">Escríbenos con tu negocio y ciudad. Respondemos en menos de 24 horas con una propuesta y un precio cerrado.</p>
+    <div class="cta-row">
+      <a class="btn btn--light js-wa" href="#contacto" data-msg="Hola coduv.dev, quiero cotizar una web para mi negocio.">Escribir por WhatsApp</a>
+      <a class="btn btn--ghost" href="mailto:jaren22uv@gmail.com">jaren22uv@gmail.com</a>
+    </div>
     <div class="who">
-      <img src="img/brand/johan-640.webp" alt="Johan Untuña" width="72" height="72" loading="lazy">
-      <p><strong>Te responde Johan Untuña</strong>Diseño y programo cada web yo mismo, desde Latacunga.</p>
+      <img src="img/brand/johan-640.webp" alt="Johan Untuña" width="40" height="40" loading="lazy">
+      <p>Te responde <strong>Johan Untuña</strong>, quien diseña y programa cada proyecto. Latacunga, Ecuador.</p>
     </div>
-    <h2>¿Tu negocio todavía no tiene web? <em>Hablemos.</em></h2>
-    <p class="lead">Escríbenos por WhatsApp con tu negocio y ciudad. Respondemos en menos de 24 horas con los siguientes pasos.</p>
-    <div class="cta-row cta-row--center">
-      <a class="btn btn--acc btn--lg js-wa" href="#contacto" data-msg="Hola coduv.dev, quiero cotizar una web para mi negocio.">Escribir por WhatsApp</a>
-      <a class="btn btn--ghost btn--lg" href="mailto:jaren22uv@gmail.com">jaren22uv@gmail.com</a>
-    </div>
-    <p class="cta__small">Latacunga, Ecuador · Remoto para cualquier país</p>
   </div>
 </section>
 
 </main>
 
 <footer class="foot">
-  <div class="wrap foot__in">
-    <a class="brand" href="#top"><img src="img/v2/favicon.svg" alt="" width="24" height="24"><span class="brand__name">coduv<b>.dev</b></span></a>
-    <nav aria-label="Redes">
-      <a href="https://www.facebook.com/profile.php?id=61594049955441" target="_blank" rel="noopener">Facebook</a>
-      <a href="https://www.instagram.com/coduv.ec/" target="_blank" rel="noopener">Instagram</a>
-      <a href="https://github.com/JohanUV" target="_blank" rel="noopener">GitHub</a>
-      <a class="js-wa" href="#contacto">WhatsApp +593 96 360 7760</a>
-    </nav>
-    <p>© <span id="year">2026</span> coduv.dev · Hecho con código propio.</p>
+  <div class="wrap foot__grid">
+    <div>
+      <a class="brand" href="#top"><img src="img/v2/favicon.svg" alt="" width="20" height="20"><span>coduv.dev</span></a>
+      <p>Software y páginas web para negocios. Latacunga, Ecuador. Remoto para cualquier país.</p>
+    </div>
+    <nav aria-label="Servicios"><h4>Servicios</h4><a href="#servicios">Páginas web</a><a href="#servicios">Automatización</a><a href="#servicios">Sistemas y datos</a><a href="#precios">Precios</a></nav>
+    <nav aria-label="Rubros"><h4>Rubros</h4><a href="transporte">Transporte</a><a href="muebles">Muebles</a><a href="academias">Academias</a><a href="gimnasios">Gimnasios</a></nav>
+    <nav aria-label="Contacto"><h4>Contacto</h4><a class="js-wa" href="#contacto">WhatsApp</a><a href="https://www.facebook.com/profile.php?id=61594049955441" target="_blank" rel="noopener">Facebook</a><a href="https://www.instagram.com/coduv.ec/" target="_blank" rel="noopener">Instagram</a><a href="https://github.com/JohanUV" target="_blank" rel="noopener">GitHub</a></nav>
   </div>
+  <div class="wrap foot__end">© <span id="year">2026</span> coduv.dev</div>
 </footer>
 
-<div class="bar"><a class="btn btn--acc js-wa" href="#contacto">Cotizar mi web por WhatsApp</a></div>
+<div class="bar"><a class="btn btn--light js-wa" href="#contacto">Cotizar por WhatsApp</a></div>
 
-<a class="fab js-wa" href="#contacto" aria-label="Escribir por WhatsApp" data-msg="Hola coduv.dev, quiero cotizar una web para mi negocio.">
-  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.4.6-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg>
-</a>
-
-<script src="js/v2.js?v=4" defer></script>
+<script src="js/v2.js?v=5" defer></script>
 </body>
 </html>
