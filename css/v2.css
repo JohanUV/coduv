@@ -61,7 +61,7 @@ em { font-style: normal; color: var(--acc); }
 .nav__in { display: flex; align-items: center; gap: 24px; height: 66px; }
 .brand { display: inline-flex; align-items: center; gap: 10px; }
 .brand img { border-radius: 7px; }
-.brand__name { font: 800 19px/1 var(--sans); font-stretch: 125%; letter-spacing: -.03em; }
+.brand__name { font: 800 19px/1 var(--sans); font-stretch: 125%; letter-spacing: .02em; }
 .brand__name b { font-weight: 800; color: var(--acc); }
 .nav__links { display: flex; gap: 4px; margin-left: auto; }
 .nav__links a { font-size: 14px; color: var(--muted); padding: 8px 12px; border-radius: 8px; transition: color .2s, background .2s; }
