@@ -1,0 +1,82 @@
+/* coduv · mezcla negro/blanco, redes de nodos, haces de luz y animaciones sutiles (marca Tuerca C) */
+:root { --bg: #050505; }
+body { background: #050505; }
+.nav { background: rgba(5, 5, 5, .9); }
+
+/* ── secciones claras (corte recto y limpio) ── */
+.sec--claro {
+  --bg: #fafaf8; --bg-1: #ffffff; --bg-2: #ffffff; --bg-3: #efefea;
+  --line: rgba(5, 5, 5, .09); --line-2: rgba(5, 5, 5, .15);
+  --text: #0a0a0a; --muted: #55584f; --dim: #7d8077; --acc: #5f9400;
+  background-color: var(--bg); color: var(--text); border-top: 0;
+}
+.sec--claro + .sec { border-top: 0; }
+.sec--claro .btn--light { background: #0a0a0a; color: #fafaf8; }
+.sec--claro .btn--light:hover { background: #1c1c1c; }
+.sec--claro .btn--ghost { background: #fff; }
+.sec--claro .btn--ghost:hover { background: var(--bg-3); }
+.sec--claro .dot { background: #7fb800; box-shadow: 0 0 0 4px rgba(127, 184, 0, .15); }
+.sec--claro .case:hover .browser { border-color: rgba(5, 5, 5, .25); }
+.sec--claro .browser, .sec--claro .phone { box-shadow: 0 30px 70px -30px rgba(5, 5, 5, .4), 0 0 0 1px var(--line); }
+
+/* ── capas de fondo ── */
+.hero, .sec { position: relative; isolation: isolate; }
+.hero > .wrap, .sec > .wrap { position: relative; z-index: 1; }
+.fx { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.fx > canvas, .fx > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.fx--hero { mask-image: radial-gradient(ellipse 90% 80% at 70% 40%, #000 30%, transparent 80%); -webkit-mask-image: radial-gradient(ellipse 90% 80% at 70% 40%, #000 30%, transparent 80%); }
+/* la red vive en los costados: se desvanece hacia el centro, donde está el contenido */
+.fx--sec { mask-image: linear-gradient(90deg, #000 0, rgba(0,0,0,.9) 12%, transparent 30%, transparent 70%, rgba(0,0,0,.9) 88%, #000 100%); -webkit-mask-image: linear-gradient(90deg, #000 0, rgba(0,0,0,.9) 12%, transparent 30%, transparent 70%, rgba(0,0,0,.9) 88%, #000 100%); }
+
+/* red de nodos */
+.enlace { stroke: rgba(255, 255, 255, .13); stroke-width: 1; stroke-dasharray: var(--l); stroke-dashoffset: var(--l); transition: stroke-dashoffset 1.6s cubic-bezier(.2, .7, .2, 1); }
+.punto { fill: rgba(255, 255, 255, .45); opacity: 0; transition: opacity .8s; }
+.punto--verde { fill: #c8f560; filter: drop-shadow(0 0 5px rgba(200, 245, 96, .9)); }
+.halo { fill: rgba(200, 245, 96, .14); opacity: 0; transform-box: fill-box; transform-origin: center; }
+.fx.is-in .enlace { stroke-dashoffset: 0; }
+.fx.is-in .punto { opacity: 1; }
+.fx.is-in .halo { opacity: 1; animation: respira 3.6s ease-in-out infinite; }
+.sec--claro .enlace { stroke: rgba(5, 5, 5, .16); }
+.sec--claro .punto { fill: rgba(5, 5, 5, .45); }
+.sec--claro .punto--verde { fill: #6fa800; filter: none; }
+.sec--claro .halo { fill: rgba(111, 168, 0, .16); }
+@keyframes respira { 0%, 100% { transform: scale(.6); opacity: .9; } 50% { transform: scale(1.35); opacity: .25; } }
+
+/* ── cierre: franjas de luz diagonales con grano (inspirado en Raycast) ── */
+.cta { overflow: hidden; }
+.haces { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+  -webkit-mask-image: radial-gradient(ellipse 75% 85% at 50% 50%, #000 35%, transparent 80%); mask-image: radial-gradient(ellipse 75% 85% at 50% 50%, #000 35%, transparent 80%); }
+.haces i { position: absolute; top: -30%; height: 160%; left: 50%; border-radius: 999px; transform: translateX(var(--x)) rotate(38deg); filter: blur(var(--b, 14px));
+  background: linear-gradient(180deg, transparent 0%, var(--c) 38%, var(--c) 62%, transparent 100%); opacity: var(--o, .8);
+  animation: deriva 16s ease-in-out infinite alternate; animation-delay: var(--t, 0s); }
+.haces i:nth-child(1) { --x: -330px; width: 150px; --c: rgba(127, 184, 0, .55); --b: 22px; --o: .55; --t: -4s; }
+.haces i:nth-child(2) { --x: -170px; width: 110px; --c: rgba(200, 245, 96, .85); --b: 12px; --o: .75; }
+.haces i:nth-child(3) { --x: -40px; width: 70px; --c: rgba(170, 230, 70, .8); --b: 10px; --o: .6; --t: -9s; }
+.haces i:nth-child(4) { --x: 70px; width: 40px; --c: rgba(127, 184, 0, .6); --b: 8px; --o: .45; --t: -6s; }
+.haces i:nth-child(5) { --x: 230px; width: 26px; --c: rgba(200, 245, 96, .5); --b: 6px; --o: .35; --t: -2s; }
+.haces::after { content: ""; position: absolute; inset: 0; opacity: .22; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.cta::after { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(ellipse 38% 30% at 50% 52%, rgba(5, 5, 5, .85), rgba(5, 5, 5, .4) 60%, transparent 85%); }
+@keyframes deriva { to { transform: translateX(calc(var(--x) + 70px)) rotate(38deg); } }
+
+/* ── animaciones de aparición (blur → nítido, estilo Resend) ── */
+.revela { opacity: 0; transform: translateY(14px); filter: blur(8px); transition: opacity .9s cubic-bezier(.2, .7, .2, 1), transform .9s cubic-bezier(.2, .7, .2, 1), filter .9s cubic-bezier(.2, .7, .2, 1); transition-delay: var(--d, 0s); }
+.revela.is-in { opacity: 1; transform: none; filter: none; }
+
+/* ── brillo que sigue al cursor en tarjetas ── */
+.luz { position: relative; }
+.luz::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .3s;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(200, 245, 96, .09), transparent 45%); }
+.sec--claro .luz::after { background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(111, 168, 0, .10), transparent 45%); }
+.luz:hover::after { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .revela { opacity: 1; transform: none; filter: none; transition: none; }
+  .enlace { stroke-dashoffset: 0; transition: none; } .punto { opacity: 1; transition: none; }
+  .fx.is-in .halo { animation: none; } .haces i { animation: none; }
+}
+@media (max-width: 760px) { .fx--sec { opacity: .7; } .haces { transform: scale(.6); } }
+
+/* responsive: el grid del hero no debe ensancharse más que la pantalla (venía de antes) */
+.hero__grid > * { min-width: 0; }
+@media (max-width: 900px) { .hero__grid { grid-template-columns: minmax(0, 1fr); } }
